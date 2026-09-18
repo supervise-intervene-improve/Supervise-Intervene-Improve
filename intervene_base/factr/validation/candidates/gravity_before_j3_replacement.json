@@ -1,0 +1,39 @@
+{
+  "pass": true,
+  "hardware_fingerprint": "acf14fbb132308e2b2a2b9045fb978cf5535956bb9f5cb43e97fdd12571eed71",
+  "settings": {
+    "gain_scale": 1.0,
+    "max_torque_nm": 15,
+    "hold_initial_pose": false
+  },
+  "criteria": {
+    "max_peak_velocity_rad_s": 4.532375721333994,
+    "max_peak_displacement_rad": 6.188078498330677
+  },
+  "trial": {
+    "classification": "pass",
+    "timestamp_unix_s": 1784299015.426671,
+    "start_q_rad": [
+      0.14916505860639528,
+      -0.7415629364488608,
+      -0.10708738521234075,
+      -2.3371649316930716,
+      -0.060466019212114475,
+      1.582407832911291,
+      -0.06566907900280627
+    ],
+    "end_q_rad": [
+      -0.4000000634566643,
+      -0.11569877499151915,
+      0.13681556006147655,
+      -2.0503105243584567,
+      -0.015980576363430643,
+      2.033398184549669,
+      -0.8050478187636849
+    ],
+    "peak_velocity_rad_s": 4.532375721333994,
+    "peak_displacement_rad": 6.188078498330677,
+    "saturation_fraction": 0.0,
+    "sample_count": 1755
+  }
+}

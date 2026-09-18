@@ -1,0 +1,157 @@
+<mujoco model="multi_cups">
+
+  <default>
+
+    <default class="visual_cup">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+
+    <default class="collision_cup">
+      <geom group="3" type="mesh" rgba="1 1 1 0.0"
+        contype="1"
+        conaffinity="1"
+        condim="4"
+        friction="0.2 0.05 0.005"
+        solimp="0.85 0.95 0.005 0.5 2"
+        solref="0.012 3.0"/>
+    </default>
+
+  </default>
+
+  <asset>
+    <material name="cup_red"    rgba="0.85 0.20 0.20 1"/>
+    <material name="cup_green"  rgba="0.20 0.75 0.30 1"/>
+    <material name="cup_blue"   rgba="0.20 0.45 0.90 1"/>
+    <material name="cup_yellow" rgba="0.95 0.80 0.20 1"/>
+    <mesh name="cup1_visual" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug.obj" scale="0.00075 0.00075 0.00076303925"/>
+    <mesh name="cup1_col_0" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_0.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_1" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_1.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_2" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_2.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_3" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_3.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_4" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_4.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_5" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_5.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_6" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_6.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_7" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_7.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_8" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_8.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_9" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_9.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_10" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_10.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_11" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_11.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+    <mesh name="cup1_col_12" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_12.obj" scale="0.0007725 0.0007725 0.00076303925"/>
+
+    <mesh name="cup2_visual" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug.obj" scale="0.00095 0.00095 0.0011336576"/>
+    <mesh name="cup2_col_0" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_0.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_1" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_1.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_2" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_2.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_3" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_3.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_4" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_4.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_5" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_5.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_6" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_6.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_7" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_7.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_8" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_8.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_9" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_9.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_10" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_10.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_11" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_11.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+    <mesh name="cup2_col_12" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_12.obj" scale="0.0009785 0.0009785 0.0011336576"/>
+
+    <mesh name="cup3_visual" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug.obj" scale="0.001 0.001 0.00083826185"/>
+    <mesh name="cup3_col_0" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_0.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_1" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_1.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_2" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_2.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_3" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_3.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_4" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_4.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_5" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_5.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_6" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_6.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_7" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_7.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_8" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_8.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_9" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_9.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_10" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_10.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_11" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_11.obj" scale="0.00103 0.00103 0.00083826185"/>
+    <mesh name="cup3_col_12" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_12.obj" scale="0.00103 0.00103 0.00083826185"/>
+
+    <mesh name="cup4_visual" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug.obj" scale="0.0013 0.0013 0.0007855936"/>
+    <mesh name="cup4_col_0" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_0.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_1" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_1.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_2" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_2.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_3" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_3.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_4" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_4.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_5" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_5.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_6" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_6.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_7" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_7.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_8" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_8.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_9" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_9.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_10" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_10.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_11" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_11.obj" scale="0.001339 0.001339 0.0007855936"/>
+    <mesh name="cup4_col_12" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets/cup/the_mug_collision_12.obj" scale="0.001339 0.001339 0.0007855936"/>
+  </asset>
+
+  <worldbody>
+    <body name="cup1" pos="0.74660164 -0.12821442 0.225">
+      <joint name="cup1_free" type="free" damping="0.01"/>
+      <geom mesh="cup1_visual" class="visual_cup" material="cup_red"/>
+      <geom mesh="cup1_col_0" class="collision_cup"/>
+      <geom mesh="cup1_col_1" class="collision_cup"/>
+      <geom mesh="cup1_col_2" class="collision_cup"/>
+      <geom mesh="cup1_col_3" class="collision_cup"/>
+      <geom mesh="cup1_col_4" class="collision_cup"/>
+      <geom mesh="cup1_col_5" class="collision_cup"/>
+      <geom mesh="cup1_col_6" class="collision_cup"/>
+      <geom mesh="cup1_col_7" class="collision_cup"/>
+      <geom mesh="cup1_col_8" class="collision_cup"/>
+      <geom mesh="cup1_col_9" class="collision_cup"/>
+      <geom mesh="cup1_col_10" class="collision_cup"/>
+      <geom mesh="cup1_col_11" class="collision_cup"/>
+      <geom mesh="cup1_col_12" class="collision_cup"/>
+    </body>
+    <body name="cup2" pos="0.45059398 -0.11109961 0.225">
+      <joint name="cup2_free" type="free" damping="0.01"/>
+      <geom mesh="cup2_visual" class="visual_cup" material="cup_green"/>
+      <geom mesh="cup2_col_0" class="collision_cup"/>
+      <geom mesh="cup2_col_1" class="collision_cup"/>
+      <geom mesh="cup2_col_2" class="collision_cup"/>
+      <geom mesh="cup2_col_3" class="collision_cup"/>
+      <geom mesh="cup2_col_4" class="collision_cup"/>
+      <geom mesh="cup2_col_5" class="collision_cup"/>
+      <geom mesh="cup2_col_6" class="collision_cup"/>
+      <geom mesh="cup2_col_7" class="collision_cup"/>
+      <geom mesh="cup2_col_8" class="collision_cup"/>
+      <geom mesh="cup2_col_9" class="collision_cup"/>
+      <geom mesh="cup2_col_10" class="collision_cup"/>
+      <geom mesh="cup2_col_11" class="collision_cup"/>
+      <geom mesh="cup2_col_12" class="collision_cup"/>
+    </body>
+    <body name="cup3" pos="0.74792136 0.11536615 0.225">
+      <joint name="cup3_free" type="free" damping="0.01"/>
+      <geom mesh="cup3_visual" class="visual_cup" material="cup_blue"/>
+      <geom mesh="cup3_col_0" class="collision_cup"/>
+      <geom mesh="cup3_col_1" class="collision_cup"/>
+      <geom mesh="cup3_col_2" class="collision_cup"/>
+      <geom mesh="cup3_col_3" class="collision_cup"/>
+      <geom mesh="cup3_col_4" class="collision_cup"/>
+      <geom mesh="cup3_col_5" class="collision_cup"/>
+      <geom mesh="cup3_col_6" class="collision_cup"/>
+      <geom mesh="cup3_col_7" class="collision_cup"/>
+      <geom mesh="cup3_col_8" class="collision_cup"/>
+      <geom mesh="cup3_col_9" class="collision_cup"/>
+      <geom mesh="cup3_col_10" class="collision_cup"/>
+      <geom mesh="cup3_col_11" class="collision_cup"/>
+      <geom mesh="cup3_col_12" class="collision_cup"/>
+    </body>
+    <body name="cup4" pos="0.45700567 0.12414169 0.225">
+      <joint name="cup4_free" type="free" damping="0.01"/>
+      <geom mesh="cup4_visual" class="visual_cup" material="cup_yellow"/>
+      <geom mesh="cup4_col_0" class="collision_cup"/>
+      <geom mesh="cup4_col_1" class="collision_cup"/>
+      <geom mesh="cup4_col_2" class="collision_cup"/>
+      <geom mesh="cup4_col_3" class="collision_cup"/>
+      <geom mesh="cup4_col_4" class="collision_cup"/>
+      <geom mesh="cup4_col_5" class="collision_cup"/>
+      <geom mesh="cup4_col_6" class="collision_cup"/>
+      <geom mesh="cup4_col_7" class="collision_cup"/>
+      <geom mesh="cup4_col_8" class="collision_cup"/>
+      <geom mesh="cup4_col_9" class="collision_cup"/>
+      <geom mesh="cup4_col_10" class="collision_cup"/>
+      <geom mesh="cup4_col_11" class="collision_cup"/>
+      <geom mesh="cup4_col_12" class="collision_cup"/>
+    </body>
+  </worldbody>
+</mujoco>

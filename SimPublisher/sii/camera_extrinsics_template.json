@@ -1,0 +1,24 @@
+{
+  "cameras": {
+    "top": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "front": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "left": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "right": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "wrist": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    }
+  }
+}

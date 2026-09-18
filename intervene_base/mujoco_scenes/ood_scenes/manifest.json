@@ -1,0 +1,1902 @@
+[
+  {
+    "scene_type": "wire_spoon",
+    "index": 1,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_001.xml",
+    "global_seed": 0,
+    "scene_seed": 3626764237,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6330987497082984,
+          -0.008069884859703419,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.4368982458570215
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6441176329053971,
+          0.19661763393983178,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.845229954541632,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 2,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_002.xml",
+    "global_seed": 0,
+    "scene_seed": 1806341205,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5490980451530338,
+          -0.01616079422595426,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.29171933246243936
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6587449580396497,
+          0.019585240182712085,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.9539679089210118,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 3,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_003.xml",
+    "global_seed": 0,
+    "scene_seed": 2195908194,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6631640902404421,
+          -0.1842452251596428,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.7084000275355766
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5950661673601181,
+          0.03240076787796893,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2677386361109875,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 4,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_004.xml",
+    "global_seed": 0,
+    "scene_seed": 2046968324,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.539638811728543,
+          -0.08577946122109484,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.3790449218129194
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6364871936241415,
+          0.09736912625165295,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3042387580972727,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 5,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_005.xml",
+    "global_seed": 0,
+    "scene_seed": 3900315155,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6337758607918098,
+          -0.17158503946798942,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.4355434567494003
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5954009414770106,
+          0.12089837040782166,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8190397150677446,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 6,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_006.xml",
+    "global_seed": 0,
+    "scene_seed": 2167613558,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.7039304299161243,
+          -0.12016768243929415,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.5541915354130141
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5909875277683221,
+          0.17785687485802568,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2801765065285262,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 7,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_007.xml",
+    "global_seed": 0,
+    "scene_seed": 1210484339,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6821845031798673,
+          -0.08926455375127738,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.4936690348008915
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5654506805574675,
+          0.03755050514332872,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3113185444270483,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 8,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_008.xml",
+    "global_seed": 0,
+    "scene_seed": 3246154361,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5851215731473601,
+          -0.19019762933067658,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.6221533324304231
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6001717139406231,
+          0.07215105247918432,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.789831731663585,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 9,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_009.xml",
+    "global_seed": 0,
+    "scene_seed": 3874773259,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.7123548137707885,
+          -0.005286673874556225,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.5762103341993746
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5296573181042555,
+          0.15494799315066504,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8885202934513146,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 10,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_010.xml",
+    "global_seed": 0,
+    "scene_seed": 1332073689,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6406275999126003,
+          -0.11516822371285551,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.6564325070191168
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5134652438192774,
+          0.17609676028136573,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3395523461678795,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 11,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_011.xml",
+    "global_seed": 0,
+    "scene_seed": 3134603515,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5903666624102332,
+          -0.19122604698046006,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.5732570455513044
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5679665844139787,
+          0.1082310697120606,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.1943101452862517,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 12,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_012.xml",
+    "global_seed": 0,
+    "scene_seed": 2937688618,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6090171346475953,
+          -0.08628254284412203,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.46544505378950335
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.611459997197672,
+          0.05673667262224724,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3254181907337501,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 13,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_013.xml",
+    "global_seed": 0,
+    "scene_seed": 432508404,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.61664141478025,
+          -0.16999272083142622,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.5581391139074645
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6075648587842062,
+          0.14825869320116455,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8481620329986237,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 14,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_014.xml",
+    "global_seed": 0,
+    "scene_seed": 1864753826,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5402848027445812,
+          -0.08750598357475291,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.6072208074447343
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6565403185014271,
+          0.007636786096420956,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8682763473265092,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 15,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_015.xml",
+    "global_seed": 0,
+    "scene_seed": 3921352636,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6391938099906659,
+          -0.18224899356321814,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.744746516640025
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5566313425451171,
+          0.015324904277626717,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.9434428940553368,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 16,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_016.xml",
+    "global_seed": 0,
+    "scene_seed": 2048741382,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5498285990371237,
+          -0.10360505642313778,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.5475361452099907
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5318452888608826,
+          0.12540880551364833,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.284412405671434,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 17,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_017.xml",
+    "global_seed": 0,
+    "scene_seed": 1118805955,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.576702692157691,
+          -0.07494928610705565,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.2550047851774161
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6286156177356004,
+          0.11199344171826194,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8286262926406225,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 18,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_018.xml",
+    "global_seed": 0,
+    "scene_seed": 60308648,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5666575815822996,
+          -0.08169384583018723,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.28946316016117735
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6213030097822624,
+          0.10657540262444853,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3023169078880805,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 19,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_019.xml",
+    "global_seed": 0,
+    "scene_seed": 3726325546,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5884377975212801,
+          -0.11943651244061482,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.7162015124790468
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5465902147676074,
+          0.003410924356285561,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2798602943521484,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 20,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_020.xml",
+    "global_seed": 0,
+    "scene_seed": 3738645480,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5648468089529415,
+          -0.047428583402977814,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.7045053945331983
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6713614967962069,
+          0.06146647769086842,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2738920478743314,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 21,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_021.xml",
+    "global_seed": 0,
+    "scene_seed": 2437440079,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.7171111846449332,
+          -0.0426047754288994,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.4322084261041997
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.661160101881009,
+          0.10973494378495259,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.232381595476139,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 22,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_022.xml",
+    "global_seed": 0,
+    "scene_seed": 4155553746,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5726012082579814,
+          -0.08893289199711274,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.2711011296909091
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5308214544495343,
+          0.04902394023821788,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3105352245013895,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 23,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_023.xml",
+    "global_seed": 0,
+    "scene_seed": 1924014660,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5235340931567718,
+          -0.028132188353697157,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.46695930922126505
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5097219435919768,
+          0.10177460879422993,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.1725117236027471,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 24,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_024.xml",
+    "global_seed": 0,
+    "scene_seed": 4006490763,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6608857336509781,
+          -0.07913504309258222,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.283896713610226
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6039069654261878,
+          0.18114364462887697,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3037349934685598,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 25,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_025.xml",
+    "global_seed": 0,
+    "scene_seed": 468399889,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5715019487475863,
+          -0.01158527379319732,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.7171786304762338
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.586405002694846,
+          0.15461507342539887,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.9019006355292363,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 26,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_026.xml",
+    "global_seed": 0,
+    "scene_seed": 2367674807,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5304568596491829,
+          -0.1326675324128254,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.541403504590562
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5254270599496677,
+          0.1903761212305689,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.186784476573724,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 27,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_027.xml",
+    "global_seed": 0,
+    "scene_seed": 3034658173,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5324973266373308,
+          -0.06913362444454141,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.7393163820454803
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5305853607796879,
+          0.18925933259232147,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2205582730648792,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 28,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_028.xml",
+    "global_seed": 0,
+    "scene_seed": 2351240810,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6657913408149309,
+          -0.10861458092300441,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.40714697988758364
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5403377369820074,
+          0.18194443318531606,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2441537325167458,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 29,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_029.xml",
+    "global_seed": 0,
+    "scene_seed": 2320500417,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6289636830433243,
+          -0.12236211784399793,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.6902676766576744
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6196768063002823,
+          0.02055304219648422,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2479608676042808,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 30,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_030.xml",
+    "global_seed": 0,
+    "scene_seed": 2523796087,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.666848397804414,
+          -0.1697615316333804,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.6162708729792608
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5017823734731637,
+          0.1498750380455741,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8932494339719548,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 31,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_031.xml",
+    "global_seed": 0,
+    "scene_seed": 1911213317,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5520571795113114,
+          -0.027029034385514322,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.5496516076302442
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6387006176710638,
+          0.10490489654835192,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.9170887881067642,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 32,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_032.xml",
+    "global_seed": 0,
+    "scene_seed": 1653137829,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.684116009118045,
+          -0.0815812257159476,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.5532818683612768
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5601068899852777,
+          0.1687796508778623,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3614590056410842,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 33,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_033.xml",
+    "global_seed": 0,
+    "scene_seed": 2472402290,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.676829905937349,
+          -0.0538446560251952,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.5694602636310608
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.671011320428993,
+          0.15514489633202472,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.7935557297738491,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 34,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_034.xml",
+    "global_seed": 0,
+    "scene_seed": 1246955724,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6438494621380285,
+          -0.10600569996897113,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.25899692819981934
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6077248905103435,
+          0.013438638048207597,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.1788563834657804,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 35,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_035.xml",
+    "global_seed": 0,
+    "scene_seed": 801997237,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.7158567003149089,
+          -0.18803785773492523,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.4786852500324525
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6174326240696021,
+          0.08495023047490312,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8541340168353317,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 36,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_036.xml",
+    "global_seed": 0,
+    "scene_seed": 2820330615,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6646617847677272,
+          -0.1814641263065003,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.42779495405471063
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6151029507879422,
+          0.04461959910705698,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.359322161621257,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 37,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_037.xml",
+    "global_seed": 0,
+    "scene_seed": 2046685052,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.558863040694429,
+          -0.15624882146866031,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.6655478434393052
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6596036616946622,
+          0.03451913633618247,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.261755101907369,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 38,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_038.xml",
+    "global_seed": 0,
+    "scene_seed": 3253884088,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.615385292372009,
+          -0.04483984851632855,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.6244342478879894
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5913461186647494,
+          0.15175763793921024,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8246018339350227,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 39,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_039.xml",
+    "global_seed": 0,
+    "scene_seed": 3765700075,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6277279034255074,
+          -0.09271894097359319,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.7053143365930123
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5304771948846325,
+          0.1749930942661989,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8842467321476093,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 40,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_040.xml",
+    "global_seed": 0,
+    "scene_seed": 3965891272,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6235841618170131,
+          -0.13768330636893522,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.3237800204443847
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5361526392463511,
+          0.15906787796905028,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.9438425644645145,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 41,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_041.xml",
+    "global_seed": 0,
+    "scene_seed": 3618339112,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.534654583856851,
+          -0.04655586099580361,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.37262514314200995
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5666810305943908,
+          0.18135903997892022,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.853953323192673,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 42,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_042.xml",
+    "global_seed": 0,
+    "scene_seed": 3485918757,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6995229181610798,
+          -0.08696572022015109,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.36555204239155975
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6715055298144524,
+          0.161902300342061,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.7852639087436422,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 43,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_043.xml",
+    "global_seed": 0,
+    "scene_seed": 3648514451,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5807952659258389,
+          -0.12071852494646698,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.7432225256003953
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6591504918737366,
+          0.006044341681527655,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8807879704698791,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 44,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_044.xml",
+    "global_seed": 0,
+    "scene_seed": 4079209076,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6696821824924588,
+          -0.1026771100017609,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.724380143983469
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5019402585842202,
+          0.11347126646109469,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.827737534433239,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 45,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_045.xml",
+    "global_seed": 0,
+    "scene_seed": 2489771122,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5744849952640063,
+          -0.1175568423171029,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.3320538492361662
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.605707236917476,
+          0.12486410588426818,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8192710693401524,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 46,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_046.xml",
+    "global_seed": 0,
+    "scene_seed": 1935153793,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6384686639186716,
+          -0.004963100039922119,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.29446909779889513
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6320027382609028,
+          0.09317059374468047,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.2912932977739846,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 47,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_047.xml",
+    "global_seed": 0,
+    "scene_seed": 3407305306,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.5676671745658765,
+          -0.14214860754282305,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.5437346299984083
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6368176187041368,
+          0.09816483810496789,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3551115865294312,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 48,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_048.xml",
+    "global_seed": 0,
+    "scene_seed": 353789296,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6026706360933749,
+          -0.13725150275986592,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.6919684828914611
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5627998958929532,
+          0.11589171063924841,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.28802497933156,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 49,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_049.xml",
+    "global_seed": 0,
+    "scene_seed": 2706462215,
+    "attempts": 2,
+    "params": {
+      "object": {
+        "pos": [
+          0.6126902496719892,
+          -0.020919163633220522,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          -0.2838452286086866
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.5068673999614544,
+          0.142692380572743,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.8994681110691198,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  },
+  {
+    "scene_type": "wire_spoon",
+    "index": 50,
+    "scene": "mujoco_scenes/ood_scenes/wire_spoon/wire_spoon_ood_050.xml",
+    "global_seed": 0,
+    "scene_seed": 3629580546,
+    "attempts": 1,
+    "params": {
+      "object": {
+        "pos": [
+          0.6563208336338167,
+          -0.10813392929119728,
+          0.22
+        ],
+        "euler": [
+          0.0,
+          0.0,
+          0.2847503516021353
+        ]
+      },
+      "spoon1": {
+        "pos": [
+          0.6023838861536271,
+          0.14262726261802083,
+          0.27
+        ],
+        "euler": [
+          1.5708,
+          1.3099802694228817,
+          1.5708
+        ]
+      }
+    },
+    "validation": {
+      "reason": "ok",
+      "contact_count": 11
+    }
+  }
+]

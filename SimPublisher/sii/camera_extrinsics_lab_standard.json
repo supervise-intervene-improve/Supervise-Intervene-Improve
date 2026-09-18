@@ -1,0 +1,26 @@
+{
+  "profile": "lab_standard_v1",
+  "notes": "Shared default extrinsics profile for lab1/lab2/lab3 unified publisher runs.",
+  "cameras": {
+    "top": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "front": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "left": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "right": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    },
+    "wrist": {
+      "translation": [0.0, 0.0, 0.0],
+      "rpy_deg": [0.0, 0.0, 0.0]
+    }
+  }
+}

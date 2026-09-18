@@ -1,0 +1,65 @@
+<mujoco model="panda_table_scene">
+    <include file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/generated_panda/sii_panda_model_soft_gripper.xml"/>
+
+
+    <include file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/generated_boxes/generated_ycb_textured_boxes.xml"/>
+
+
+    <!-- <option timestep="0.001" integrator="implicitfast"/> -->
+    <option timestep="0.001"
+        solver="Newton"
+        cone="elliptic"
+        impratio="10">
+        <flag multiccd="enable"/>
+    </option>
+
+    <default>
+        <geom solimp="0.95 0.99 0.001 0.5 2"
+                solref="0.01 1"
+                condim="6"
+                friction="1.0 0.01 0.001"/>
+
+        <default class="table_leg">
+            <geom type="box" size="0.03 0.03 0.2" material="wood_leg"/>
+        </default>
+    </default>
+
+    <visual>
+        <global offwidth="1920" offheight="1080"/>
+    </visual>
+
+    <asset>
+        <!-- This is for SKYBOX -->
+        <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="32" height="512"/>
+        <!-- This is for GROUND -->
+        <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
+        <material name="grid" texture="grid" texrepeat="2 2" texuniform="true" reflectance=".2"/>
+        <!-- This is for TABLE -->
+        <material name="wood_top" rgba="0.6 0.4 0.3 1"/>
+        <material name="wood_leg" rgba="0.4 0.25 0.15 1"/>
+    </asset> 
+
+
+    <worldbody>
+        <!-- This is for GROUND -->
+        <geom name="floor" type="plane" material="grid" size="2 2 0.1"/>
+
+        <!-- This is for TABLE -->
+        <body name="table" pos="0.6 0 0.2">
+            <geom name="table_top" type="box" size="0.35 0.45 0.02" material="wood_top"/>
+
+            <geom name="table_leg_1" class="table_leg" pos="0.28 0.38 -0.2"  />
+            <geom name="table_leg_2" class="table_leg" pos="0.28 -0.38 -0.2" />
+            <geom name="table_leg_3" class="table_leg" pos="-0.28 0.38 -0.2" />
+            <geom name="table_leg_4" class="table_leg" pos="-0.28 -0.38 -0.2"/>
+        </body>
+
+        <!-- This is for LIGHT -->
+        <light name="main_light" pos="0 0 5.0" dir="0 0 -1"
+            diffuse="1 1 1" specular="0.2 0.2 0.2"/>
+
+        <!-- This is for CAMERAS -->
+        <camera name="front" pos="1.5 0 0.8" euler="0 1.2 1.57"/>
+        <camera name="top" pos="0.4 0 1.6" euler="-1.57 0 0"/>
+    </worldbody>
+</mujoco>

@@ -1,0 +1,49 @@
+<mujoco model="wire_base">
+    <asset>
+        <material name="orange_mat" rgba="1 0.356 0.133 1.0"/>
+        <mesh name="my_mesh" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/wire_and_loop_assets/Basic_Model_Body.stl" scale="0.001 0.001 0.001"/>
+    </asset>
+
+    <default>
+        <default class="wire_base_collision">
+            <geom contype="1" conaffinity="1"
+                  rgba="0 0 0 0"
+                  friction="0 0 0"
+                  solref="0.01 1"
+                  solimp="0.95 0.99 0.001 0.5 2"
+                  condim="1"
+                  margin="0"
+                  gap="0"/>
+        </default>
+    </default>
+
+    <worldbody>
+        <body name="object" pos="0.6 -0.2 0.22">
+            <geom type="mesh" mesh="my_mesh" material="orange_mat"
+                  contype="0" conaffinity="0"/>
+
+            <!-- base plate -->
+            <geom name="body_col_base" type="box" class="wire_base_collision"
+                  pos="0 0 0.005" friction="10.0 0.1 0.1"
+                  size="0.05 0.05 0.005"/>
+
+            <!-- vertical stem -->
+            <geom name="body_col_stem" type="capsule" class="wire_base_collision"
+                  pos="0 0 0.08"
+                  quat="1 0 0 0"
+                  size="0.011 0.06"/>
+
+            <!-- top horizontal arm -->
+            <geom name="body_col_top_x" type="capsule" class="wire_base_collision"
+                  pos="-0.05 -0.10 0.15"
+                  quat="0.707107 0 0.707107 0"
+                  size="0.011 0.05"/>
+
+            <!-- top vertical arm in XY plane -->
+            <geom name="body_col_top_y" type="capsule" class="wire_base_collision"
+                  pos="0.0 -0.05 0.15"
+                  quat="0.707107 0.707107 0 0"
+                  size="0.011 0.05"/>
+        </body>
+    </worldbody>
+</mujoco>

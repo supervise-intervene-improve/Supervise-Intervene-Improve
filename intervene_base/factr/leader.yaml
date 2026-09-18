@@ -1,0 +1,77 @@
+name: factr
+
+dynamixel:
+  # USB port name given by the command: ls /dev/serial/by-id/
+  # readlink -f /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FTAKRKHW-if00-port0
+  # echo 1 | sudo tee /sys/bus/usb-serial/devices/ttyUSB0/latency_timer
+  # dynamixel_port: "usb-FTDI_USB__-__Serial_Converter_FT951EJA-if00-port0"
+  # dynamixel_port: "usb-FTDI_USB__-__Serial_Converter_FTA7NNJ8-if00-port0"
+  dynamixel_port: "usb-FTDI_USB__-__Serial_Converter_FTAKRKHW-if00-port0"
+  # Servo types
+  servo_types: ["XC330_T288_T", "XM430_W210_T", "XC330_T288_T", "XM430_W210_T", "XC330_T288_T", "XC330_T288_T", "XC330_T288_T", "XC330_T288_T"]
+  # Servo joint directions to match that of the leader arm
+  joint_signs: [1, 1, 1, -1, 1, -1, 1, -1] # use this one for normal config
+  # joint_signs: [1, -1, 1, -1, 1, -1, 1, -1]
+
+arm_teleop:
+  # URDF used for creating leader arm dynamics model to compute gravity compensation
+  leader_urdf: "factr_teleop_franka.urdf"
+  num_arm_joints: 7
+  arm_joint_limits_max: [2.8973, 1.7628, 2.8973, -0.8698, 2.8973, 3.7525, 6.8973]
+  arm_joint_limits_min: [-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -6.8973]
+  arm_joint_limits_safety_margin: 0.1
+  initialization:
+    # The expected leader arm joint position before launching the script
+    # calibration_joint_pos: [0.0, -0.7854, 0.0, -2.356, 0.0, 1.57, 0.0]
+    calibration_joint_pos: [0.00, 0.511, -0.110, -1.389, -0.133, 2.222, -3.113]
+    # The leader arm must be brought to this joint position before the follower starts mirroring the leader
+    # initial_match_joint_pos: [0.0, -0.7854, 0.0, -2.356, 0.0, 1.57, 0.0]
+    initial_match_joint_pos: [0.00, 0.511, -0.110, -1.389, -0.133, 2.222, -3.113]
+
+gripper_teleop:
+  # The maximum range (in rad) of the leader gripper trigger
+  actuation_range: 0.8
+
+controller:
+  frequency: 500
+  torque_feedback:
+    enable: False
+    # enable: True
+    gain: 3.0
+    damping: 0.0
+    motor_scalar: 94.5652173913
+  gravity_comp:
+    enable: True
+
+    # gain: [0.01, 0.25, 0.01, 0.65, 0.35, 0.85, 0.85]
+    gain: [0.1, 0.8, 0.85, 0.55, 0.85, 0.85, 0.85]
+    # gain: [0.1, 0.3, 0.15, 0.75, 0.85, 0.85, 0.85]
+    
+  null_space_regulation:
+    # null_space_joint_target:   [0.00, 0.511, -0.110, -1.389, -0.133, 2.222, -3.113, 0.4] # Initial pose
+    null_space_joint_target:   [0.00, -1.14346, 1.54347, -2.60561, -0.11568, 1.52258, 0.0, 0.4] # Initial pose
+    kp: 0.005
+    kd: 0.001
+    # kp: 0.1
+    # kd: 0.01
+    # kp: 0.0 # Full contrl
+    # kd: 0.0 # Full contrl
+  static_friction_comp:
+    enable_speed: 0.1
+    tau: [0.02, 0.2, 0.02, 0.2, 0.02, 0.02, 0.02]
+    gain: .1 # TODO setting this lower makes the factr much more stable but much harder to move
+  joint_limit_barrier:
+    kp: 1.03561658022
+    kd: 0.04315069084
+    # kp: 0.0
+    # kd: 0.0
+  joint_position_control:
+    interpolation_step_size: 0.5
+    kp: 1.03561658022
+    kd: 0.04315069084
+
+  gripper_feedback:
+    enable: False
+    # enable: True
+
+# default_reset_pose: [-0.0228, -0.3524, -0.0125, -2.1719,  0.0744,  1.6508, -2.4758]

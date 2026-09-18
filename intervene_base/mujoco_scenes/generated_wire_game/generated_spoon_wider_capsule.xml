@@ -1,0 +1,53 @@
+<mujoco model="spoon1">
+  
+
+  <asset>
+    <material name="spoon_green" rgba="0.223 0.392 0.278 1"/>
+    <mesh name="spoon_mesh" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/wire_and_loop_assets/Spoon_wider.stl" scale="0.001 0.001 0.001"/>
+  </asset>
+
+  <default>
+    <default class="spoon_collision">
+      <geom rgba="0 0 1 1"
+      contype="1" conaffinity="1" friction="0.003 0.0001 0.00001" solref="0.01 1" solimp="0.95 0.99 0.001 0.5 2" margin="0" gap="0" condim="1"/>
+    </default>
+
+    <default class="spoon_body_collision">
+      <geom rgba="0 0 1 1"
+            contype="1" conaffinity="1"
+            friction="3.5 0.01 0.001"
+            solref="0.01 1"
+            solimp="0.95 0.99 0.001 0.5 2"
+            condim="3"
+            priority="1"
+            margin="0"
+            gap="0"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <body name="spoon1" pos="0.4 -0.1 0.3" euler="1.5708 0 1.5708">
+      <joint name="spoon1_free" type="free"/>
+      <geom name="spoon1_visual" type="mesh" mesh="spoon_mesh" material="spoon_green" contype="0" conaffinity="0" pos="0 0 0" quat="1 0 0 0"/>
+      <geom name="spoon1_handle" type="box" pos="0.08 0 0.01" quat="1 0 0 0" size="0.05 0.016 0.01" class="spoon_body_collision"/>
+      <geom name="spoon1_ring_00" type="capsule" pos="0.0345 0 0.01" quat="0.707107 0 0 0.707107" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_01" type="capsule" pos="0.0318738 0.0132026 0.01" quat="0.55557 0 0 0.83147" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_02" type="capsule" pos="0.0243952 0.0243952 0.01" quat="0.382683 0 0 0.92388" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_03" type="capsule" pos="0.0132026 0.0318738 0.01" quat="0.19509 0 0 0.980785" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_04" type="capsule" pos="2.11252e-18 0.0345 0.01" quat="6.12323e-17 0 0 1" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_05" type="capsule" pos="-0.0132026 0.0318738 0.01" quat="0.19509 0 0 -0.980785" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_06" type="capsule" pos="-0.0243952 0.0243952 0.01" quat="0.382683 0 0 -0.92388" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_07" type="capsule" pos="-0.0318738 0.0132026 0.01" quat="0.55557 0 0 -0.83147" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_08" type="capsule" pos="-0.0345 4.22503e-18 0.01" quat="0.707107 0 0 -0.707107" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_09" type="capsule" pos="-0.0318738 -0.0132026 0.01" quat="0.83147 0 0 -0.55557" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_10" type="capsule" pos="-0.0243952 -0.0243952 0.01" quat="0.92388 0 0 -0.382683" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_11" type="capsule" pos="-0.0132026 -0.0318738 0.01" quat="0.980785 0 0 -0.19509" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_12" type="capsule" pos="-6.33755e-18 -0.0345 0.01" quat="1 0 0 -1.22465e-16" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_13" type="capsule" pos="0.0132026 -0.0318738 0.01" quat="0.980785 0 0 0.19509" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_14" type="capsule" pos="0.0243952 -0.0243952 0.01" quat="0.92388 0 0 0.382683" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_ring_15" type="capsule" pos="0.0318738 -0.0132026 0.01" quat="0.83147 0 0 0.55557" size="0.005 0.0055" class="spoon_collision"/>
+      <geom name="spoon1_top_connector" type="box" pos="-0.035 0 0.01" quat="0.707107 0 0 0.707107" size="0.01 0.0045 0.005" class="spoon_body_collision"/>
+      <geom name="spoon1_top_tab" type="box" pos="-0.042 0 0.01" quat="0.707107 0 0 0.707107" size="0.0305 0.004 0.01" class="spoon_body_collision"/>
+    </body>
+  </worldbody>
+</mujoco>

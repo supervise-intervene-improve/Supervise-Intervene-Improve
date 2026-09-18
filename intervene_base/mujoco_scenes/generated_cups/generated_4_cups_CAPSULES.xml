@@ -1,0 +1,157 @@
+<mujoco model="multi_cup_scene">
+  <!-- <option gravity="0 0 0"/> -->
+
+  
+    <default>
+        <default class="cup_collision">
+        <geom
+            contype="1" conaffinity="1"
+            friction="0.2 0.005 0.0001"
+            solref="0.01 1"
+            solimp="0.95 0.99 0.001 0.5 2"
+            condim="3"
+            margin="0"
+            gap="0"
+            rgba="0 0 1 0.2"/>
+        </default>
+    </default>
+    
+
+  <asset>
+    <material name="cup_red" rgba="0.85 0.20 0.20 1"/>
+    <mesh name="cup_mesh_1" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/cups/cup_nontextured.stl" scale="0.9 0.9 0.9"/>
+    <material name="cup_green" rgba="0.20 0.75 0.30 1"/>
+    <mesh name="cup_mesh_2" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/cups/cup_nontextured.stl" scale="1.2 1.2 1"/>
+    <material name="cup_blue" rgba="0.20 0.45 0.90 1"/>
+    <mesh name="cup_mesh_3" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/cups/cup_nontextured.stl" scale="1.4 1.4 1.1"/>
+    <material name="cup_yellow" rgba="0.95 0.80 0.20 1"/>
+    <mesh name="cup_mesh_4" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/cups/cup_nontextured.stl" scale="0.8 0.8 1.15"/>
+  </asset>
+
+  <worldbody>
+    <body name="cup1" pos="0.45 -0.22 0.24">
+      <joint name="cup1_free" type="free"/>
+      <geom name="cup1_visual" type="mesh" mesh="cup_mesh_1" material="cup_red" contype="0" conaffinity="0" pos="0 0 0" quat="1 0 0 0"/>
+      <geom name="cup1_bottom" type="cylinder" pos="-0.0247487 -0.0512338 0.00143985" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0234366 0.002" class="cup_collision"/>
+      <geom name="cup1_wallcap_00" type="capsule" pos="-0.010747 -0.0299984 0.0287677" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_01" type="capsule" pos="-0.0160211 -0.0271201 0.0285721" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_02" type="capsule" pos="-0.0218319 -0.0255875 0.0284132" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_03" type="capsule" pos="-0.0278416 -0.0254897 0.0283002" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_04" type="capsule" pos="-0.033701 -0.0268324 0.0282396" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_05" type="capsule" pos="-0.0390695 -0.0295374 0.028235" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_06" type="capsule" pos="-0.0436353 -0.0334477 0.0282867" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_07" type="capsule" pos="-0.0471328 -0.038336 0.0283916" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_08" type="capsule" pos="-0.0493589 -0.0439181 0.0285437" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_09" type="capsule" pos="-0.0501842 -0.0498697 0.0287341" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_10" type="capsule" pos="-0.0495607 -0.0558449 0.0289517" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_11" type="capsule" pos="-0.0475247 -0.0614964 0.0291839" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_12" type="capsule" pos="-0.0441944 -0.0664958 0.0294173" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_13" type="capsule" pos="-0.0397635 -0.0705525 0.0296381" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_14" type="capsule" pos="-0.0344894 -0.0734308 0.0298337" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_15" type="capsule" pos="-0.0286787 -0.0749633 0.0299927" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_16" type="capsule" pos="-0.022669 -0.0750612 0.0301057" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_17" type="capsule" pos="-0.0168096 -0.0737185 0.0301663" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_18" type="capsule" pos="-0.011441 -0.0710135 0.0301709" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_19" type="capsule" pos="-0.00687528 -0.0671032 0.0301192" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_20" type="capsule" pos="-0.00337774 -0.0622149 0.0300143" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_21" type="capsule" pos="-0.00115163 -0.0566328 0.0298622" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_22" type="capsule" pos="-0.000326341 -0.0506812 0.0296718" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_23" type="capsule" pos="-0.00094983 -0.044706 0.0294542" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_24" type="capsule" pos="-0.00298586 -0.0390545 0.029222" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+      <geom name="cup1_wallcap_25" type="capsule" pos="-0.00631611 -0.0340551 0.0289886" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0242842" class="cup_collision"/>
+    </body>
+    <body name="cup2" pos="0.45 -0.12 0.24">
+      <joint name="cup2_free" type="free"/>
+      <geom name="cup2_visual" type="mesh" mesh="cup_mesh_2" material="cup_green" contype="0" conaffinity="0" pos="0 0 0" quat="1 0 0 0"/>
+      <geom name="cup2_bottom" type="cylinder" pos="-0.0331027 -0.0681141 0.00137357" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0309155 0.002" class="cup_collision"/>
+      <geom name="cup2_wallcap_00" type="capsule" pos="-0.0148081 -0.040687 0.0317667" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_01" type="capsule" pos="-0.021664 -0.0369455 0.0315125" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_02" type="capsule" pos="-0.0292175 -0.0349532 0.0313059" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_03" type="capsule" pos="-0.0370296 -0.0348261 0.031159" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_04" type="capsule" pos="-0.0446463 -0.0365714 0.0310802" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_05" type="capsule" pos="-0.051625 -0.0400878 0.0310743" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_06" type="capsule" pos="-0.05756 -0.0451708 0.0311414" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_07" type="capsule" pos="-0.0621066 -0.0515251 0.0312778" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_08" type="capsule" pos="-0.0650003 -0.0587814 0.0314755" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_09" type="capsule" pos="-0.0660731 -0.066518 0.031723" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_10" type="capsule" pos="-0.0652626 -0.0742852 0.0320059" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_11" type="capsule" pos="-0.062616 -0.0816317 0.0323077" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_12" type="capsule" pos="-0.0582869 -0.0881305 0.0326111" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_13" type="capsule" pos="-0.0525271 -0.0934038 0.0328982" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_14" type="capsule" pos="-0.0456712 -0.0971454 0.0331525" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_15" type="capsule" pos="-0.0381177 -0.0991376 0.0333591" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_16" type="capsule" pos="-0.0303056 -0.0992648 0.033506" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_17" type="capsule" pos="-0.0226889 -0.0975194 0.0335847" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_18" type="capsule" pos="-0.0157102 -0.0940031 0.0335907" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_19" type="capsule" pos="-0.00977519 -0.08892 0.0335235" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_20" type="capsule" pos="-0.00522867 -0.0825657 0.0333872" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_21" type="capsule" pos="-0.00233493 -0.0753094 0.0331895" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_22" type="capsule" pos="-0.00126212 -0.0675729 0.032942" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_23" type="capsule" pos="-0.0020726 -0.0598056 0.0326591" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_24" type="capsule" pos="-0.00471927 -0.0524592 0.0323572" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+      <geom name="cup2_wallcap_25" type="capsule" pos="-0.00904832 -0.0459604 0.0320539" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0274825" class="cup_collision"/>
+    </body>
+    <body name="cup3" pos="0.45 0.12 0.24">
+      <joint name="cup3_free" type="free"/>
+      <geom name="cup3_visual" type="mesh" mesh="cup_mesh_3" material="cup_blue" contype="0" conaffinity="0" pos="0 0 0" quat="1 0 0 0"/>
+      <geom name="cup3_bottom" type="cylinder" pos="-0.0386526 -0.0794044 0.00130939" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0359014 0.002" class="cup_collision"/>
+      <geom name="cup3_wallcap_00" type="capsule" pos="-0.0175155 -0.0478127 0.0348114" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_01" type="capsule" pos="-0.0254259 -0.0434957 0.034518" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_02" type="capsule" pos="-0.0341412 -0.041197 0.0342796" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_03" type="capsule" pos="-0.0431549 -0.0410503 0.0341101" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_04" type="capsule" pos="-0.0519432 -0.0430641 0.0340192" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_05" type="capsule" pos="-0.0599953 -0.0471213 0.0340124" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_06" type="capsule" pos="-0.0668432 -0.0529862 0.0340899" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_07" type="capsule" pos="-0.0720891 -0.0603179 0.0342472" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_08" type="capsule" pos="-0.0754279 -0.0686903 0.0344753" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_09" type="capsule" pos="-0.0766657 -0.0776168 0.0347608" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_10" type="capsule" pos="-0.0757306 -0.0865788 0.0350873" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_11" type="capsule" pos="-0.0726768 -0.0950552 0.0354356" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_12" type="capsule" pos="-0.0676819 -0.102554 0.0357856" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_13" type="capsule" pos="-0.0610361 -0.108638 0.0361169" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_14" type="capsule" pos="-0.0531258 -0.112955 0.0364102" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_15" type="capsule" pos="-0.0444105 -0.115254 0.0366486" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_16" type="capsule" pos="-0.0353968 -0.1154 0.0368181" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_17" type="capsule" pos="-0.0266085 -0.113387 0.036909" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_18" type="capsule" pos="-0.0185564 -0.10933 0.0369159" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_19" type="capsule" pos="-0.0117085 -0.103465 0.0368384" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_20" type="capsule" pos="-0.00646263 -0.0961329 0.036681" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_21" type="capsule" pos="-0.00312379 -0.0877605 0.0364529" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_22" type="capsule" pos="-0.00188597 -0.078834 0.0361674" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_23" type="capsule" pos="-0.00282112 -0.0698721 0.035841" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_24" type="capsule" pos="-0.00587488 -0.0613956 0.0354926" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+      <geom name="cup3_wallcap_25" type="capsule" pos="-0.0108698 -0.0538972 0.0351427" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0306807" class="cup_collision"/>
+    </body>
+    <body name="cup4" pos="0.45 0.22 0.24">
+      <joint name="cup4_free" type="free"/>
+      <geom name="cup4_visual" type="mesh" mesh="cup_mesh_4" material="cup_yellow" contype="0" conaffinity="0" pos="0 0 0" quat="1 0 0 0"/>
+      <geom name="cup4_bottom" type="cylinder" pos="-0.0217988 -0.0459196 0.00129204" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0209437 0.002" class="cup_collision"/>
+      <geom name="cup4_wallcap_00" type="capsule" pos="-0.00939334 -0.0264356 0.036653" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_01" type="capsule" pos="-0.0141402 -0.023845 0.0364769" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_02" type="capsule" pos="-0.01937 -0.0224656 0.0363339" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_03" type="capsule" pos="-0.0247789 -0.0223776 0.0362322" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_04" type="capsule" pos="-0.0300525 -0.023586 0.0361776" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_05" type="capsule" pos="-0.0348844 -0.0260206 0.0361735" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_06" type="capsule" pos="-0.0389937 -0.02954 0.03622" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_07" type="capsule" pos="-0.0421416 -0.0339396 0.0363144" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_08" type="capsule" pos="-0.0441451 -0.0389637 0.0364513" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_09" type="capsule" pos="-0.0448879 -0.0443203 0.0366227" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_10" type="capsule" pos="-0.0443267 -0.0496981 0.0368185" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_11" type="capsule" pos="-0.0424943 -0.0547846 0.0370276" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_12" type="capsule" pos="-0.0394969 -0.0592842 0.0372376" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_13" type="capsule" pos="-0.035509 -0.0629353 0.0374364" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_14" type="capsule" pos="-0.0307621 -0.0655259 0.0376124" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_15" type="capsule" pos="-0.0255323 -0.0669053 0.0377555" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_16" type="capsule" pos="-0.0201234 -0.0669933 0.0378572" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_17" type="capsule" pos="-0.0148498 -0.0657849 0.0379117" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_18" type="capsule" pos="-0.0100179 -0.0633503 0.0379158" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_19" type="capsule" pos="-0.00590865 -0.0598309 0.0378693" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_20" type="capsule" pos="-0.00276076 -0.0554313 0.0377749" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_21" type="capsule" pos="-0.000757199 -0.0504072 0.037638" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_22" type="capsule" pos="-1.44149e-05 -0.0450506 0.0374667" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_23" type="capsule" pos="-0.000575573 -0.0396728 0.0372708" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_24" type="capsule" pos="-0.00240806 -0.0345863 0.0370618" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+      <geom name="cup4_wallcap_25" type="capsule" pos="-0.00540538 -0.0300867 0.0368518" quat="0.889113 -0.0195101 -0.000219579 0.457272" size="0.0015 0.0322799" class="cup_collision"/>
+    </body>
+  </worldbody>
+</mujoco>

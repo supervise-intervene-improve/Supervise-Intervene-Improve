@@ -1,0 +1,17 @@
+/franka_emika_panda
+
+/.tempvenv
+
+
+
+/.venv
+/IRXR-Unity
+
+/MVPointCloudVR
+/.venv_bad
+SII_mujoco.apk
+__pycache__/
+*.pyc
+session_logs/
+*.log
+/src/

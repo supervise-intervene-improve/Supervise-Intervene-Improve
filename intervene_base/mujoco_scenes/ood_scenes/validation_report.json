@@ -1,0 +1,22 @@
+{
+  "requested_per_scene_type": 50,
+  "global_seed": 0,
+  "scene_types": [
+    "wire_spoon"
+  ],
+  "generated": {
+    "wire_spoon": 50
+  },
+  "rejected": {
+    "wire_spoon": 1
+  },
+  "failures": [],
+  "assumptions": [
+    "Cup Z-scale intervals are applied to the third mesh scale component for visual and collision meshes.",
+    "Cup X/Y scales are preserved, keeping the top-down circular footprint and pair fit relationships.",
+    "Boxes use OOD-local texture assets under mujoco_scenes/ood_scenes/boxes_cups/assets; no external assets are downloaded.",
+    "Object-table contacts involving table_top are allowed as support contacts; task contacts with other objects, robot, walls, floor, or table legs are rejected.",
+    "Boxes/cups XY and box-yaw randomization use demo_collector/config.py ranges: +/-0.01 m XY and +/-5 degrees yaw for boxes.",
+    "Each generated scene includes a generated copy of the Panda XML with absolute meshdir pointing at mujoco_scenes/assets; the original Panda XML is not modified."
+  ]
+}

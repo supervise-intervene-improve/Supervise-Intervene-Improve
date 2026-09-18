@@ -1,0 +1,41 @@
+<mujoco model="mesh_test">
+    <compiler angle="radian"
+              meshdir="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/assets"/>
+
+    <asset>
+        <mesh name="soft_finger"
+              file="soft_gripper_finger.stl"
+              scale="0.001 0.001 0.001"/>
+    </asset>
+
+    <worldbody>
+        <light pos="0 0 2"/>
+
+        <geom name="floor" type="plane" size="2 2 0.1" rgba="0.8 0.8 0.8 1"/>
+
+        <!-- red +X -->
+        <geom name="x_axis" type="box"
+              pos="0.25 0 0.05"
+              size="0.25 0.01 0.01"
+              rgba="1 0 0 1"/>
+
+        <!-- green +Y -->
+        <geom name="y_axis" type="box"
+              pos="0 0.25 0.05"
+              size="0.01 0.25 0.01"
+              rgba="0 1 0 1"/>
+
+        <!-- blue +Z -->
+        <geom name="z_axis" type="box"
+              pos="0 0 0.25"
+              size="0.01 0.01 0.25"
+              rgba="0 0 1 1"/>
+
+        <body name="finger_test" pos="0 0 0.2">
+            <geom name="finger_mesh"
+                  type="mesh"
+                  mesh="soft_finger"
+                  rgba="1 0.54 0 1"/>
+        </body>
+    </worldbody>
+</mujoco>

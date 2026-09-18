@@ -1,0 +1,48 @@
+<mujoco model="panda_table_scene">
+  <include file="includes/sii_panda_model_soft_gripper.xml" />
+  <include file="includes/wire_spoon_ood_032_base.xml" />
+  <include file="includes/wire_spoon_ood_032_spoon.xml" />
+  <option timestep="0.001" solver="Newton" cone="elliptic" impratio="5">
+    <flag multiccd="enable" />
+  </option>
+  <default>
+    <geom solimp="0.95 0.99 0.001 0.5 2" solref="0.01 1" condim="4" friction="2.0 0.01 0.001" />
+    <default class="table_leg">
+      <geom type="box" size="0.03 0.03 0.2" material="wood_leg" />
+    </default>
+    <default class="cell">
+      <geom type="box" rgba="0.0 0.0 0.0 1" />
+    </default>
+  </default>
+  <visual>
+    <global offwidth="1920" offheight="1080" />
+    <map znear="0.01" zfar="3" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="32" height="512" />
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4" />
+    <material name="grid" texture="grid" texrepeat="2 2" texuniform="true" reflectance=".2" />
+    <material name="wood_top" rgba="0.6 0.4 0.3 1" />
+    <material name="wood_leg" rgba="0.4 0.25 0.15 1" />
+  </asset>
+  <worldbody>
+    <geom name="floor" type="plane" rgba="0 0 0 1" size="2 2 0.1" />
+    <geom name="back_wall" class="cell" pos="-0.20 0 0.8" size="0.02 1.2 0.8" contype="0" conaffinity="0" />
+    <geom name="left_wall" class="cell" pos="0.75 -0.9 0.8" size="1.0 0.02 0.8" contype="0" conaffinity="0" />
+    <geom name="right_wall" class="cell" pos="0.75 0.9 0.8" size="1.0 0.02 0.8" contype="0" conaffinity="0" />
+    <body name="table" pos="0.6 0 0.2">
+      <geom name="table_top" type="box" size="0.35 0.45 0.02" material="wood_top" />
+      <geom name="table_leg_1" class="table_leg" pos="0.28 0.38 -0.2" />
+      <geom name="table_leg_2" class="table_leg" pos="0.28 -0.38 -0.2" />
+      <geom name="table_leg_3" class="table_leg" pos="-0.28 0.38 -0.2" />
+      <geom name="table_leg_4" class="table_leg" pos="-0.28 -0.38 -0.2" />
+    </body>
+    <light name="main_light" pos="0 0 5.0" dir="0 0 -1" diffuse="1 1 1" specular="0.2 0.2 0.2" />
+    <camera name="top" pos="0.6 0 1.2" euler="0 0 -1.5708" />
+    <camera name="front" pos="1.5 0 0.8" xyaxes="0.000 1.000 -0.000 -0.542 0.000 0.841" />
+    <camera name="right" pos="1.1  0.55 0.6" xyaxes="-0.740 0.673 0.000 -0.306 -0.337 0.890" />
+    <camera name="left" pos="1.1 -0.55 0.6" xyaxes="0.740 0.673 -0.000 -0.306 0.337 0.890" />
+    <camera name="VIS_RIGHT" pos="0.6 +0.75 0.5" xyaxes="-1.000 -0.000 0.000 0.000 -0.316 0.949" />
+    <camera name="VIS_LEFT" pos="0.6 -0.75 0.5" xyaxes="+1.000 -0.000 0.000 0.000 0.316 0.949" />
+  </worldbody>
+</mujoco>

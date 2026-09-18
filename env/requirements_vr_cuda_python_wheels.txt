@@ -1,0 +1,24 @@
+# CUDA-related Python wheels captured from the working VR .venv
+# This is not enough by itself: driver/toolkit/custom Open3D are system-level too.
+cuda-bindings==12.9.4
+cuda-pathfinder==1.4.3
+nvidia-cublas-cu12==12.8.4.1
+nvidia-cuda-cupti-cu12==12.8.90
+nvidia-cuda-nvrtc-cu12==12.8.93
+nvidia-cuda-runtime-cu12==12.8.90
+nvidia-cudnn-cu12==9.10.2.21
+nvidia-cufft-cu12==11.3.3.83
+nvidia-cufile-cu12==1.13.1.3
+nvidia-curand-cu12==10.3.9.90
+nvidia-cusolver-cu12==11.7.3.90
+nvidia-cusparse-cu12==12.5.8.93
+nvidia-cusparselt-cu12==0.7.1
+nvidia-nccl-cu12==2.27.5
+nvidia-nvjitlink-cu12==12.8.93
+nvidia-nvshmem-cu12==3.4.5
+nvidia-nvtx-cu12==12.8.90
+open3d @ file:///home/user/open3d_build/Open3D/build/lib/python_package/pip_package/open3d-0.19.0%2B1e7b17438-cp313-cp313-manylinux_2_35_x86_64.whl#sha256=5614aa9bfcf373900c574949ae4d65b9915e51b419a1a1954cc5ba45b8554913
+torch==2.9.1+cpu
+torchaudio==2.9.1+cpu
+torchdiffeq==0.2.5
+torchvision==0.24.1+cpu

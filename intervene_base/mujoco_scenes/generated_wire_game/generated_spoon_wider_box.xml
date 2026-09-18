@@ -1,0 +1,43 @@
+<mujoco model="spoon1">
+  <!-- <option gravity="0 0 0"/> -->
+
+  <asset>
+    <material name="spoon_green" rgba="0.223 0.392 0.278 1"/>
+    <mesh name="spoon_mesh" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/wire_and_loop_assets/Spoon_wider.stl" scale="0.001 0.001 0.001"/>
+  </asset>
+
+  <default>
+    <default class="spoon_collision_cls">
+      <geom rgba="0 1 0 0.7"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <body name="spoon1" pos="0.6 0.2 0.3" euler="1.57079 0.0 1.57079">
+      <joint name="spoon1_free" type="free"/>
+      <geom name="spoon1_visual" type="mesh" mesh="spoon_mesh" material="spoon_green" contype="0" conaffinity="0" pos="0 0 0" quat="1 0 0 0"/>
+
+      <geom name="spoon1_handle" type="box" pos="0.08 0 0.01" quat="1 0 0 0" size="0.05 0.016 0.01" contype="1" conaffinity="1"                                    class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_00" type="box" pos="0.0335 0 0.01" quat="0.707107 0 0 0.707107" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"                class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_01" type="box" pos="0.0312378 0.0121016 0.01" quat="0.565136 0 0 0.824997" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"     class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_02" type="box" pos="0.0247568 0.0225688 0.01" quat="0.403921 0 0 0.914794" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"     class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_03" type="box" pos="0.0149322 0.029988 0.01" quat="0.228951 0 0 0.973438" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"      class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_04" type="box" pos="0.00309099 0.0333571 0.01" quat="0.0461835 0 0 0.998933" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"   class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_05" type="box" pos="-0.00916771 0.0322212 0.01" quat="0.138156 0 0 -0.99041" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"   class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_06" type="box" pos="-0.0201883 0.0267336 0.01" quat="0.317791 0 0 -0.948161" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"   class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_07" type="box" pos="-0.0284823 0.0176355 0.01" quat="0.486604 0 0 -0.873622" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"   class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_08" type="box" pos="-0.0329296 0.00615561 0.01" quat="0.638847 0 0 -0.769334" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"  class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_09" type="box" pos="-0.0329296 -0.00615561 0.01" quat="0.769334 0 0 -0.638847" size="0.0065 0.0045 0.01" contype="1" conaffinity="1" class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_10" type="box" pos="-0.0284823 -0.0176355 0.01" quat="0.873622 0 0 -0.486604" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"  class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_11" type="box" pos="-0.0201883 -0.0267336 0.01" quat="0.948161 0 0 -0.317791" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"  class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_12" type="box" pos="-0.00916771 -0.0322212 0.01" quat="0.99041 0 0 -0.138156" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"  class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_13" type="box" pos="0.00309099 -0.0333571 0.01" quat="0.998933 0 0 0.0461835" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"  class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_14" type="box" pos="0.0149322 -0.029988 0.01" quat="0.973438 0 0 0.228951" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"     class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_15" type="box" pos="0.0247568 -0.0225688 0.01" quat="0.914794 0 0 0.403921" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"    class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_16" type="box" pos="0.0312378 -0.0121016 0.01" quat="0.824997 0 0 0.565136" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"    class="spoon_collision_cls"/>
+      <geom name="spoon1_ring_17" type="box" pos="0.0335 -8.20513e-18 0.01" quat="0.707107 0 0 0.707107" size="0.0065 0.0045 0.01" contype="1" conaffinity="1"     class="spoon_collision_cls"/>
+      <geom name="spoon1_top_connector" type="box" pos="-0.035 0 0.01" quat="0.707107 0 0 0.707107" size="0.01 0.0045 0.005" contype="1" conaffinity="1"           class="spoon_collision_cls"/>
+      <geom name="spoon1_top_tab" type="box" pos="-0.042 0 0.01" quat="0.707107 0 0 0.707107" size="0.0305 0.004 0.01" contype="1" conaffinity="1"                 class="spoon_collision_cls"/>
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,10 @@
+<mujoco model="T2">
+  <option gravity="0 0 0"/>
+  <worldbody>
+    <body name="T2" pos="0.72 0.12 0.225">
+        <joint name="T2_free" type="free"/>
+        <geom name="T2_stem" type="box" size="0.025 0.0225 0.0625" pos="0 0 0.0625" rgba="1 0 0 1" contype="1" conaffinity="1"/>
+        <geom name="T2_bar" type="box" size="0.075 0.0225 0.025" pos="0 0 0.15" rgba="1 0 0 1" contype="1" conaffinity="1"/>
+    </body>
+  </worldbody>
+</mujoco>

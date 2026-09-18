@@ -1,0 +1,40 @@
+{
+  "participant_id": "P00_example",
+  "notes": "Template. Copy to P01.json etc. and edit. Validate with:\n  python -m data_io.study_config P00_example --block 1\n\n'interface' selects what the participant SEES (rgb | pointcloud | both | none) and drives the VR launch mode. 'control' selects how they DRIVE the arm during an intervention (telekinesis | motion_controller | sim_mc | factr) and drives the launcher's FACTR_ACTIVE / MC_ACTIVE / MC_SIM flags. 'control' may be omitted; it defaults to telekinesis, which is what configs written before it existed were run with.",
+  "blocks": [
+    {
+      "block": 1,
+      "interface": "rgb",
+      "task": "tshape",
+      "condition": "id",
+      "control": "telekinesis",
+      "seed": 10001,
+      "notes": "practice/warm-up block"
+    },
+    {
+      "block": 2,
+      "interface": "pointcloud",
+      "task": "tshape",
+      "condition": "id",
+      "control": "telekinesis",
+      "seed": 10002
+    },
+    {
+      "block": 3,
+      "interface": "rgb",
+      "task": "tshape",
+      "condition": "ood",
+      "seed": 10003,
+      "notes": "no 'control' key: resolves to the telekinesis default"
+    },
+    {
+      "block": 4,
+      "interface": "pointcloud",
+      "task": "tshape",
+      "condition": "ood",
+      "control": "factr",
+      "seed": 10004,
+      "notes": "FACTR leader arm drives the simulated robot during interventions"
+    }
+  ]
+}

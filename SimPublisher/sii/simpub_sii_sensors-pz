@@ -1,0 +1,879 @@
+import argparse
+import json
+import socket
+import struct
+import time
+import threading
+import uuid
+
+import numpy as np
+import cv2
+import mujoco
+
+from simpub.core.utils import MULTICAST_GRP
+import zmq
+
+# ---- OPTIONAL: glfw is needed for Windows-safe OpenGL context for mjr_readPixels ----
+import glfw
+import json, struct, time
+import numpy as np
+
+
+
+SEPARATOR = b"|"
+
+def combine_header_with_message(topic: str, payload: bytes) -> bytes:
+    # matches irxr_sensor_publisher.py
+    return topic.encode("utf-8") + SEPARATOR + payload
+
+def _json_default(o):
+    # keep meta JSON-safe without changing binary payload layout
+    import numpy as np
+    if isinstance(o, (bytes, bytearray)):
+        # DO NOT embed giant binary blobs into JSON; just represent small bytes safely
+        return o.hex()
+    if isinstance(o, np.ndarray):
+        return o.tolist()
+    if isinstance(o, (np.integer, np.floating)):
+        return o.item()
+    raise TypeError(f"{type(o)} not JSON serializable")
+
+
+
+
+def build_rgbd_blob(*, rgb_jpg: bytes, depth_m, meta: dict, pc=None) -> bytes:
+    import json, struct
+    import numpy as np
+
+    if not isinstance(meta, dict):
+        raise TypeError(f"meta must be dict, got {type(meta)}. "
+                        f"This usually means you passed args in the wrong order.")
+
+    # Ensure meta is JSON-serializable (numpy -> python)
+    clean = {}
+    for k, v in meta.items():
+        if isinstance(v, (np.integer,)):
+            clean[k] = int(v)
+        elif isinstance(v, (np.floating,)):
+            clean[k] = float(v)
+        elif isinstance(v, np.ndarray):
+            clean[k] = v.tolist()
+        else:
+            clean[k] = v
+
+    json_bytes = json.dumps(clean, separators=(",", ":")).encode("utf-8")
+
+    if pc is None:
+        pc = np.zeros((0, 7), dtype=np.float32)
+    pc = np.asarray(pc, dtype=np.float32)
+
+    # depth_m must be float32 HxW
+    depth_m = np.asarray(depth_m, dtype=np.float32)
+
+    # Blob format (match your Unity decoder):
+    # [uint32 json_len][json][uint32 jpg_len][jpg][uint32 depth_len_bytes][depth_f32_bytes][uint32 pc_len_bytes][pc_f32_bytes]
+    depth_bytes = depth_m.tobytes(order="C")
+    pc_bytes = pc.tobytes(order="C")
+
+    out = bytearray()
+    out += struct.pack("<I", len(json_bytes)) + json_bytes
+    out += struct.pack("<I", len(rgb_jpg)) + rgb_jpg
+    out += struct.pack("<I", len(depth_bytes)) + depth_bytes
+    out += struct.pack("<I", len(pc_bytes)) + pc_bytes
+    return bytes(out)
+
+
+
+# ---------------- IRXR-compatible constants ----------------
+DISCOVERY_PORT = 7720
+SERVICE_PORT   = 7740
+TOPIC_PORT     = 7741
+SEPARATOR      = b"|"
+NODE_ID = str(uuid.uuid4())         # 36 chars
+NODE_INFO_ID = str(uuid.uuid4())    # 36 chars (change this if node info changes)
+
+
+REP_SUCCESS = b"SUCCESS"
+
+
+def list_cameras(model):
+    cams = []
+    for i in range(model.ncam):
+        name = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_CAMERA, i)
+        if name:
+            cams.append(name)
+    return cams
+
+
+# ---------------- GLFW + MJR offscreen renderer ----------------
+# ---------------- GLFW + MJR offscreen renderer ----------------
+class GLFWMjrRenderer:
+    """
+    Windows-safe:
+      - Create hidden GLFW window -> valid OpenGL context
+      - Configure MuJoCo offscreen buffer size BEFORE creating MjrContext
+      - Use MuJoCo mjr_context + mjr_readPixels for RGB + depth
+
+    Important robustness on Windows:
+      - First try COMPAT/ANY profile
+      - If MuJoCo still fails, retry with explicit 3.3 CORE profile
+    """
+
+    def __init__(self, model: mujoco.MjModel, width: int, height: int):
+        self.model = model
+        self.width = int(width)
+        self.height = int(height)
+
+        if not glfw.init():
+            raise RuntimeError("glfw.init() failed")
+
+        def _create_glfw_window():
+            # Reset all hints (GLFW keeps them global across calls)
+            glfw.default_window_hints()
+
+            # Hidden tiny window; we only need its GL context.
+            glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
+            glfw.window_hint(glfw.DOUBLEBUFFER, glfw.FALSE)
+            glfw.window_hint(glfw.DEPTH_BITS, 24)
+
+            # IMPORTANT:
+            # Do NOT set OPENGL_PROFILE at all.
+            # Request a legacy/compat context where GL_EXTENSIONS string is valid.
+            glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 2)
+            glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 1)
+
+            # Also do NOT set FORWARD_COMPAT
+            # glfw.window_hint(glfw.OPENGL_FORWARD_COMPAT, glfw.FALSE)  # optional
+
+            win = glfw.create_window(32, 32, "mujoco_offscreen", None, None)
+            if not win:
+                return None
+
+            glfw.make_context_current(win)
+            glfw.swap_interval(0)
+
+            # Print actual context + quick FBO extension visibility check
+            try:
+                from OpenGL import GL
+                v = GL.glGetString(GL.GL_VERSION)
+                r = GL.glGetString(GL.GL_RENDERER)
+                ven = GL.glGetString(GL.GL_VENDOR)
+                exts = GL.glGetString(GL.GL_EXTENSIONS)
+                print(f"[SimPub] GL context: {v.decode(errors='ignore')} | "
+                    f"{r.decode(errors='ignore')} | {ven.decode(errors='ignore')}")
+                if exts:
+                    exts_s = exts.decode(errors="ignore")
+                    print(f"[SimPub] Has ARB_framebuffer_object: {'ARB_framebuffer_object' in exts_s}")
+                else:
+                    print("[SimPub] GL_EXTENSIONS string unavailable")
+            except Exception:
+                pass
+
+            return win
+
+        # Attempt 1: Compatibility / Any profile
+        self._win = _create_glfw_window()
+        if not self._win:
+            glfw.terminate()
+            raise RuntimeError("glfw.create_window failed")
+
+        # Ensure we really have a current context before touching MuJoCo GL
+        if glfw.get_current_context() is None:
+            glfw.destroy_window(self._win)
+            glfw.terminate()
+            raise RuntimeError("No current OpenGL context after glfw.make_context_current")
+
+        # Scene + camera + options
+        self.scene = mujoco.MjvScene(self.model, maxgeom=10000)
+        self.cam = mujoco.MjvCamera()
+        self.opt = mujoco.MjvOption()
+        mujoco.mjv_defaultCamera(self.cam)
+        mujoco.mjv_defaultOption(self.opt)
+
+        # CRITICAL: Configure MuJoCo offscreen FBO size BEFORE creating MjrContext.
+        # Otherwise MuJoCo may allocate FBOs with unexpected defaults and fail checks.
+        self.model.vis.global_.offwidth = self.width
+        self.model.vis.global_.offheight = self.height
+        self.model.vis.quality.offsamples = 0  # keep MSAA off unless you need it
+        
+        self.con = mujoco.MjrContext(self.model, mujoco.mjtFontScale.mjFONTSCALE_150)
+        # Force rendering into the offscreen buffer sized above.
+        try:
+            mujoco.mjr_setBuffer(mujoco.mjtFramebuffer.mjFB_OFFSCREEN, self.con)
+        except Exception as e:
+            print(f"[SimPub][WARN] mjr_setBuffer(mjFB_OFFSCREEN) failed: {e}")
+
+
+        # Viewport & buffers
+        self.viewport = mujoco.MjrRect(0, 0, self.width, self.height)
+        self.rgb = np.zeros((self.height, self.width, 3), dtype=np.uint8)
+        self.depth = np.zeros((self.height, self.width), dtype=np.float32)
+
+    def close(self):
+        try:
+            glfw.make_context_current(self._win)
+        except Exception:
+            pass
+        try:
+            glfw.destroy_window(self._win)
+        except Exception:
+            pass
+        glfw.terminate()
+
+    def render(self, data: mujoco.MjData, cam_name: str):
+        # Always ensure our context is current on this thread
+        glfw.make_context_current(self._win)
+
+        cam_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_CAMERA, cam_name)
+        if cam_id < 0:
+            raise RuntimeError(f"Camera not found: {cam_name}")
+
+        self.cam.type = mujoco.mjtCamera.mjCAMERA_FIXED
+        self.cam.fixedcamid = cam_id
+
+        mujoco.mjv_updateScene(
+            self.model, data, self.opt, None, self.cam,
+            mujoco.mjtCatBit.mjCAT_ALL, self.scene
+        )
+        mujoco.mjr_render(self.viewport, self.scene, self.con)
+        mujoco.mjr_readPixels(self.rgb, self.depth, self.viewport, self.con)
+
+        depth_m = depth_buffer_to_meters(self.model, self.depth)
+        return self.rgb.copy(), depth_m.astype(np.float32)
+
+
+def depth_buffer_to_meters(model: mujoco.MjModel, depth_buf: np.ndarray) -> np.ndarray:
+    """
+    mjr_readPixels returns depth buffer values in [0,1] (OpenGL).
+    Convert to linear depth in meters using near/far from model.vis.map.
+    """
+    # MuJoCo uses these for rendering depth
+    znear = float(model.vis.map.znear)
+    zfar  = float(model.vis.map.zfar)
+
+    d = np.clip(depth_buf, 1e-6, 1.0 - 1e-6).astype(np.float32)
+    # OpenGL depth -> linear depth
+    # z = (2*n*f) / (f + n - (2*d - 1)*(f - n))
+    z = (2.0 * znear * zfar) / (zfar + znear - (2.0 * d - 1.0) * (zfar - znear))
+    return z
+
+
+def depth_to_pointcloud(depth_m: np.ndarray, fovy_deg: float, stride: int = 4) -> np.ndarray:
+    H, W = depth_m.shape
+    fovy = np.deg2rad(float(fovy_deg))
+    fy = (H / 2.0) / np.tan(fovy / 2.0)
+    fx = fy
+    cx = (W - 1) / 2.0
+    cy = (H - 1) / 2.0
+
+    ys = np.arange(0, H, stride)
+    xs = np.arange(0, W, stride)
+    xx, yy = np.meshgrid(xs, ys)
+    z = depth_m[yy, xx]
+
+    valid = np.isfinite(z) & (z > 0)
+    xx = xx[valid].astype(np.float32)
+    yy = yy[valid].astype(np.float32)
+    z  = z[valid].astype(np.float32)
+
+    x = (xx - cx) * z / fx
+    y = (yy - cy) * z / fy
+    return np.stack([x, y, z], axis=1).astype(np.float32)
+
+def depth_to_pointcloud7(depth_m, rgb, fovy_deg, stride=4, point_size=0.01):
+    h, w = depth_m.shape
+    yy, xx = np.mgrid[0:h:stride, 0:w:stride].astype(np.float32)
+    z = depth_m[0:h:stride, 0:w:stride].astype(np.float32)
+
+    mask = np.isfinite(z) & (z > 0.0)
+    xx = xx[mask]; yy = yy[mask]; z = z[mask]
+
+    if z.size == 0:
+        return np.zeros((0, 7), dtype=np.float32)
+
+    fovy = np.deg2rad(float(fovy_deg))
+    fy = (h / 2.0) / np.tan(fovy / 2.0)
+    fx = fy
+    cx = (w - 1) / 2.0
+    cy = (h - 1) / 2.0
+
+    x = (xx - cx) * z / fx
+    y = (yy - cy) * z / fy
+
+    # Sample RGB at the same pixels
+    rgb_s = rgb[0:h:stride, 0:w:stride, :].astype(np.float32) / 255.0
+    c = rgb_s.reshape(-1, 3)[mask.reshape(-1)]
+
+    size = np.full((z.shape[0], 1), float(point_size), dtype=np.float32)
+
+    pc7 = np.concatenate([x[:, None], y[:, None], z[:, None], c, size], axis=1).astype(np.float32)
+    return pc7
+
+def pack_pointcloud_xyzrgbsize(xyz_unity_f32, rgb_u8=None, size=0.01):
+    import numpy as np
+    xyz = np.asarray(xyz_unity_f32, dtype=np.float32)
+    n = xyz.shape[0]
+    if rgb_u8 is None:
+        rgb = np.ones((n, 3), dtype=np.float32)
+    else:
+        rgb = (np.asarray(rgb_u8, dtype=np.float32) / 255.0).reshape(n, 3)
+    s = np.full((n, 1), float(size), dtype=np.float32)
+    pts = np.concatenate([xyz, rgb, s], axis=1)  # (N,7)
+    return pts.tobytes()
+
+
+
+
+# ---------------- IRXR Master (UDP discovery + REP service) ----------------
+MULTICAST_GRP = "239.255.10.10"
+DISCOVERY_PORT = 7720
+
+def discovery_broadcast_loop(host_ip: str, stop_evt: threading.Event):
+    # EXACT FORMAT REQUIRED BY XRNodeManager:
+    # [36 chars node_id][36 chars nodeInfoID][service_port as ascii]
+    msg = f"{NODE_ID}{NODE_INFO_ID}{SERVICE_PORT}".encode("utf-8")
+
+    print("[SimPub] Discovery raw:", msg.decode("utf-8"))
+    print(f"[SimPub] node_id={NODE_ID} nodeInfoID={NODE_INFO_ID} servicePort={SERVICE_PORT}")
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 1)
+
+    # Force multicast out of the correct NIC (Windows can throw WinError 10049)
+    try:
+        sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton(host_ip))
+    except OSError as e:
+        print(f"[SimPub][WARN] Could not set IP_MULTICAST_IF to {host_ip}: {e}. "
+              f"Continuing without forcing NIC.")
+    while not stop_evt.is_set():
+        sock.sendto(msg, (MULTICAST_GRP, DISCOVERY_PORT))
+        time.sleep(0.5)
+
+    sock.close()
+
+def service_rep_loop(zctx: zmq.Context, bind_ip: str, stop_evt: threading.Event, cams: list, pc_cams):
+    rep = zctx.socket(zmq.REP)
+    rep.bind(f"tcp://{bind_ip}:{SERVICE_PORT}")
+    print(f"[SimPub][REP] Listening on tcp://{bind_ip}:{SERVICE_PORT}")
+
+    # Build once; keep it a dict (NOT a JSON string)
+    topic_list = [f"SimPub/Sensors/{cam}/rgbd" for cam in cams]
+    if pc_cams:
+        topic_list += [f"SimPub/Sensors/{cam}/pc" for cam in pc_cams]
+
+    node_info = {
+        "name": "SimPub",
+        "type": "SimPub",
+        "nodeInfoID": NODE_INFO_ID,
+        "servicePort": SERVICE_PORT,
+        "topicPort": TOPIC_PORT,
+        "serviceList": [],
+        # IMPORTANT: list the topics you actually publish (even if Unity subscribes to "")
+        "topicList": topic_list,  # change if your real topics differ
+        "ip": HOST_IP,  # set this global from args.host_ip in main, see note below
+        "port": 0,      # some code expects 'port' to exist (even if unused)
+    }
+
+    while not stop_evt.is_set():
+        try:
+            if rep.poll(50) == 0:
+                continue
+
+            parts = rep.recv_multipart()
+            if not parts:
+                continue
+
+            # Handle both styles:
+            # 1) single frame: b"GetNodeInfo|..."
+            # 2) multipart: [b"GetNodeInfo", b"..."]
+            if len(parts) == 1:
+                raw = parts[0]
+                if SEPARATOR in raw:
+                    svc_b, _payload = raw.split(SEPARATOR, 1)
+                else:
+                    svc_b = raw
+            else:
+                svc_b = parts[0]
+
+            service = svc_b.decode("utf-8", errors="ignore").strip()
+            # Debug
+            # print(f"[SimPub][REP] recv: {service} (parts={len(parts)})")
+
+            if service in ("GetNodeInfo", "GetMasterInfo"):
+                # SINGLE FRAME, PURE JSON OBJECT BYTES
+                rep.send(json.dumps(node_info, separators=(",", ":")).encode("utf-8"))
+            else:
+                rep.send(REP_SUCCESS)
+
+        except zmq.error.ZMQError:
+            break
+        except Exception:
+            try:
+                rep.send(REP_SUCCESS)
+            except Exception:
+                pass
+
+    rep.close(0)
+
+# ---------------- Topic packet format ----------------
+# Packet layout (little-endian):
+# 4s   magic "SIIB"
+# B    version=1
+# H    cam_name_len
+# ...  cam_name utf8
+# H    width
+# H    height
+# f    fovy_deg
+# I    rgb_size
+# I    depth_size
+# I    pc_points
+# ...  rgb_jpeg bytes
+# ...  depth float32 bytes
+# ...  pc float32 bytes (pc_points*3)
+
+MAGIC = b"SIIB"
+VERSION = 1
+
+
+def pack_sensor_packet(cam_name: str, w: int, h: int, fovy_deg: float,
+                       rgb_jpeg: bytes, depth_m: np.ndarray, pc: np.ndarray) -> bytes:
+    cam_b = cam_name.encode("utf-8")
+    depth_bytes = depth_m.astype(np.float32).tobytes()
+    pc_bytes = pc.astype(np.float32).tobytes() if pc is not None and pc.shape[0] > 0 else b""
+    pc_n = int(pc.shape[0]) if pc is not None else 0
+
+    header = struct.pack(
+        "<4sBH", MAGIC, VERSION, len(cam_b)
+    ) + cam_b + struct.pack(
+        "<HHfIII",
+        int(w), int(h), float(fovy_deg),
+        int(len(rgb_jpeg)), int(len(depth_bytes)), int(pc_n)
+    )
+
+    return header + rgb_jpeg + depth_bytes + pc_bytes
+def encode_rgb_jpg(rgb_u8: np.ndarray, quality=80) -> bytes:
+    import cv2
+    ok, buf = cv2.imencode(".jpg", rgb_u8[:, :, ::-1], [int(cv2.IMWRITE_JPEG_QUALITY), int(quality)])
+    if not ok:
+        raise RuntimeError("cv2.imencode failed")
+    return buf.tobytes()
+
+def pack_rgbd_blob(cam_name: str, w: int, h: int, fovy_deg: float, timestamp: float,
+                   rgb_jpg: bytes, depth_f32: np.ndarray) -> bytes:
+    depth_bytes = depth_f32.astype(np.float32).tobytes()
+
+    header = {
+        "cam_name": cam_name,
+        "width": int(w),
+        "height": int(h),
+        "fovy_deg": float(fovy_deg),
+        "timestamp": float(timestamp),
+        "rgb_format": "jpg",
+        "depth_format": "f32",
+        "rgb_len": len(rgb_jpg),
+        "depth_len": len(depth_bytes),
+        
+    }
+    header_bytes = json.dumps(header).encode("utf-8")
+
+    out = bytearray()
+    out += struct.pack("<I", len(header_bytes))
+    out += header_bytes
+    out += struct.pack("<I", len(rgb_jpg))
+    out += rgb_jpg
+    out += struct.pack("<I", len(depth_bytes))
+    out += depth_bytes
+    return bytes(out)
+
+def depth_rgb_to_pointcloud7(depth_f32: np.ndarray, rgb_u8: np.ndarray, fovy_deg: float,
+                             stride: int = 4, size: float = 0.01) -> np.ndarray:
+    """
+    Returns Nx7 float32: x,y,z,r,g,b,size in CAMERA frame.
+    """
+    h, w = depth_f32.shape
+    fovy = np.deg2rad(fovy_deg)
+    fy = (h * 0.5) / np.tan(fovy * 0.5)
+    fx = fy  # assume square pixels
+    cx = (w - 1) * 0.5
+    cy = (h - 1) * 0.5
+
+    us = np.arange(0, w, stride)
+    vs = np.arange(0, h, stride)
+    uu, vv = np.meshgrid(us, vs)
+    z = depth_f32[vv, uu]
+
+    # Filter invalid depths
+    valid = np.isfinite(z) & (z > 1e-6)
+    uu = uu[valid].astype(np.float32)
+    vv = vv[valid].astype(np.float32)
+    z  = z[valid].astype(np.float32)
+
+    x = (uu - cx) / fx * z
+    y = (vv - cy) / fy * z   # NOTE: image v grows down; this is camera coords
+
+    # colors
+    c = rgb_u8[vv.astype(np.int32), uu.astype(np.int32), :].astype(np.float32) / 255.0
+    r = c[:, 0]
+    g = c[:, 1]
+    b = c[:, 2]
+
+    sz = np.full_like(z, float(size), dtype=np.float32)
+
+    pc7 = np.stack([x, y, z, r, g, b, sz], axis=1).astype(np.float32)
+    return pc7
+
+import numpy as np
+
+def cam_to_world(*, model, data, cam_name: str, pts_cam_mj):
+    import numpy as np
+    import mujoco
+
+    cam_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_CAMERA, cam_name)
+
+    cam_pos = np.asarray(data.cam_xpos[cam_id], dtype=np.float32)           # (3,)
+    cam_xmat_9 = np.asarray(data.cam_xmat[cam_id], dtype=np.float32).reshape(-1)
+
+    if cam_xmat_9.size != 9:
+        raise ValueError(f"Expected 9 floats for cam_xmat, got {cam_xmat_9.size}. "
+                         f"Cam '{cam_name}' id={cam_id}.")
+
+    R = cam_xmat_9.reshape(3, 3)  # camera orientation matrix from MuJoCo
+
+    pts = np.asarray(pts_cam_mj, dtype=np.float32)
+    if pts.ndim == 1:
+        pts = pts.reshape(-1, 3)
+
+    # If your camera-frame points use +Z forward but MuJoCo camera uses -Z forward,
+    # you may need: pts[:, 2] *= -1.0  (only if your cloud looks mirrored/backwards)
+    #
+    # MuJoCo cam_xmat is the camera orientation in world coordinates.
+    # With row-vector points, use R.T to map camera->world.
+    return (pts @ R.T) + cam_pos
+
+
+
+import numpy as np
+import mujoco
+
+import numpy as np
+
+def _get_cam_pos_R(data, cam_id: int):
+    # cam position
+    cam_xpos = np.asarray(data.cam_xpos)
+    if cam_xpos.ndim == 2:
+        pos = cam_xpos[cam_id]
+    else:
+        pos = cam_xpos[cam_id*3:(cam_id+1)*3]
+
+    # cam rotation (9 floats)
+    cam_xmat = np.asarray(data.cam_xmat)
+    if cam_xmat.ndim == 2:
+        # shape: (ncam, 9)
+        xmat9 = cam_xmat[cam_id]
+    else:
+        # shape: (ncam*9,)
+        xmat9 = cam_xmat[cam_id*9:(cam_id+1)*9]
+
+    xmat9 = np.asarray(xmat9).reshape(9,)
+    R = xmat9.reshape(3, 3)
+    return pos, R
+
+
+
+def mujoco_to_unity_xyz(p_mj: np.ndarray) -> np.ndarray:
+    """
+    Mapping user mentioned: (-y, z, x)
+    p_mj Nx3 -> p_unity Nx3
+    """
+    return np.stack([-p_mj[:, 1], p_mj[:, 2], p_mj[:, 0]], axis=1).astype(np.float32)
+
+def depth_to_pointcloud_xyzrgb(depth_m, rgb_u8, w, h, fovy_deg, stride=4, min_depth=0.02, max_depth=None, flip_y=False, flip_x=False):
+    fovy = np.deg2rad(fovy_deg)
+    fy = 0.5 * h / np.tan(0.5 * fovy)
+    fx = fy
+    cx, cy = (w - 1) / 2.0, (h - 1) / 2.0
+
+    yy, xx = np.mgrid[0:h:stride, 0:w:stride]
+    z = depth_m[yy, xx]
+    valid = (z > float(min_depth)) & np.isfinite(z)
+    if max_depth is not None:
+        valid &= (z < float(max_depth))
+
+    x = (xx - cx) * z / fx
+    y = (yy - cy) * z / fy
+    if flip_x:
+        x = -x
+    if flip_y:
+        y = -y
+
+    xyz = np.stack([x, y, z], axis=-1)[valid].reshape(-1, 3).astype(np.float32)
+    rgb = rgb_u8[yy, xx, :][valid].reshape(-1, 3).astype(np.uint8)
+    return xyz, rgb
+
+
+def pack_pointcloud_xyzrgba16(xyz_f32, rgb_u8):
+    n = xyz_f32.shape[0]
+    dtype = np.dtype([
+        ("x", "<f4"), ("y", "<f4"), ("z", "<f4"),
+        ("r", "u1"), ("g", "u1"), ("b", "u1"), ("a", "u1"),
+    ])
+    out = np.empty(n, dtype=dtype)
+    out["x"] = xyz_f32[:, 0]
+    out["y"] = xyz_f32[:, 1]
+    out["z"] = xyz_f32[:, 2]
+    out["r"] = rgb_u8[:, 0]
+    out["g"] = rgb_u8[:, 1]
+    out["b"] = rgb_u8[:, 2]
+    out["a"] = 255
+    return out.tobytes()
+
+import base64
+import numpy as np
+
+def _jsonable(x):
+    if isinstance(x, (bytes, bytearray)):
+        # DO NOT embed big bytes in JSON; store small signature instead
+        return {"_type": "bytes", "len": len(x)}
+    if isinstance(x, np.generic):
+        return x.item()
+    if isinstance(x, np.ndarray):
+        return x.tolist()
+    return x
+
+def sanitize_meta(meta: dict) -> dict:
+    out = {}
+    for k, v in meta.items():
+        out[k] = _jsonable(v)
+    return out
+
+def pc7_payload(xyz_world_unity: np.ndarray, rgb_u8: np.ndarray, size=0.01):
+    xyz = xyz_world_unity.astype(np.float32)
+    rgb = (rgb_u8.astype(np.float32) / 255.0)
+    s   = np.full((xyz.shape[0], 1), float(size), dtype=np.float32)
+    pc7 = np.concatenate([xyz, rgb, s], axis=1).astype(np.float32)  # (N,7)
+    return pc7.tobytes(order="C")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--xml", required=True)
+    ap.add_argument("--bind_ip", default="0.0.0.0")
+    ap.add_argument("--host_ip", default="127.0.0.1", help="IP announced to Unity via discovery")
+    ap.add_argument("--fps", type=int, default=30)
+    ap.add_argument("--w", type=int, default=640)
+    ap.add_argument("--h", type=int, default=480)
+    ap.add_argument("--cams", nargs="*", default=None)
+    ap.add_argument("--pc", action="store_true")
+    ap.add_argument("--pc_stride", type=int, default=4)
+    ap.add_argument("--pc_cams", nargs="*", default=None,
+                    help="Camera names to publish point clouds for (default: top)")
+    ap.add_argument("--pc_no_flip_z", action="store_true",
+                    help="Disable Z flip before cam_to_world (advanced; default is to flip)")
+    ap.add_argument("--pc_flip_z", action="store_true",
+                    help=argparse.SUPPRESS)  # backward compat
+    ap.add_argument("--pc_min_depth", type=float, default=0.02,
+                    help="Min depth (m) for point clouds (filters near-plane noise)")
+    ap.add_argument("--pc_max_depth", type=float, default=None,
+                    help="Max depth (m) for point clouds (defaults to zfar*0.95)")
+    ap.add_argument("--pc_flip_y", action="store_true",
+                    help="Flip Y axis in camera frame (use if cloud appears mirrored vertically)")
+    ap.add_argument("--pc_flip_x", action="store_true",
+                    help="Flip X axis in camera frame (use if cloud appears mirrored horizontally)")
+    args = ap.parse_args()
+    
+    global HOST_IP
+    HOST_IP = args.host_ip
+    model = mujoco.MjModel.from_xml_path(args.xml)
+    data  = mujoco.MjData(model)
+
+    cams = args.cams if args.cams else list_cameras(model)
+    if not cams:
+        raise RuntimeError("No cameras found in XML")
+
+    pc_max_depth = args.pc_max_depth
+    if pc_max_depth is None:
+        pc_max_depth = float(model.vis.map.zfar) * 0.95
+
+    topic_prefix = "SimPub/Sensors"
+    topic_list = [f"{topic_prefix}/{cam}/rgbd" for cam in cams]
+    pc_cams = None
+    if args.pc:
+        pc_cams = args.pc_cams if args.pc_cams else ["top"]
+        topic_list += [f"{topic_prefix}/{cam}/pc" for cam in pc_cams]
+
+    node_info = {
+        "name": "SimPub",
+        "type": "SimPub",
+        "nodeInfoID": NODE_INFO_ID,
+        "ip": args.host_ip,
+        "servicePort": SERVICE_PORT,
+        "topicPort": TOPIC_PORT,
+        "serviceList": [],
+        "topicList": topic_list,
+    }
+
+
+    print("[SimPub] XML:", args.xml)
+    print("[SimPub] Cams:", cams)
+    print("[SimPub] Publishing topics:", topic_prefix + "/<cam>/rgbd")
+    flip_z = (not args.pc_no_flip_z) or args.pc_flip_z
+    if args.pc:
+        print("[SimPub] PC cams:", args.pc_cams if args.pc_cams else ["top"])
+        print(f"[SimPub] PC depth range: {args.pc_min_depth} .. {pc_max_depth}")
+        print(f"[SimPub] PC flip Z: {flip_z}")
+        print(f"[SimPub] PC flip Y: {args.pc_flip_y}")
+        print(f"[SimPub] PC flip X: {args.pc_flip_x}")
+    print("[SimPub] Service:", f"tcp://{args.bind_ip}:{SERVICE_PORT}")
+    print("[SimPub] Topic  :", f"tcp://{args.bind_ip}:{TOPIC_PORT}")
+    print("[SimPub] Discovery broadcast on UDP", DISCOVERY_PORT)
+
+    stop_evt = threading.Event()
+
+    # ZMQ
+    zctx = zmq.Context.instance()
+
+    # Start discovery + REP service
+    t_disc = threading.Thread(target=discovery_broadcast_loop, args=(args.host_ip, stop_evt), daemon=True)
+    t_rep = threading.Thread(target=service_rep_loop,args=(zctx, args.bind_ip, stop_evt, cams, pc_cams),daemon=True)
+
+    t_disc.start()
+    t_rep.start()
+
+    # PUB socket
+    pub = zctx.socket(zmq.PUB)
+    pub.bind(f"tcp://{args.bind_ip}:{TOPIC_PORT}")
+
+
+
+    # Renderer
+    renderer = GLFWMjrRenderer(model, args.w, args.h)
+  
+    #renderer = mujoco.Renderer(model, args.w, args.h)
+
+    dt = 1.0 / float(args.fps)
+    frame_idx = 0
+    try:
+        while True:
+            t0 = time.time()
+            mujoco.mj_step(model, data)
+
+            for cam_name in cams:
+                rgb, depth_m = renderer.render(data, cam_name)
+                rgb_jpg = encode_rgb_jpg(rgb)
+
+                cam_id = model.camera(cam_name).id
+                fovy = float(model.cam_fovy[cam_id])
+
+                # ----- POINTCLOUD (selectable cams) -----
+                pc_cams = args.pc_cams if args.pc_cams else ["top"]
+                if args.pc and cam_name in pc_cams:
+                    xyz_cam, rgb_pc = depth_to_pointcloud_xyzrgb(
+                        depth_m, rgb, args.w, args.h, fovy,
+                        stride=args.pc_stride,
+                        min_depth=args.pc_min_depth,
+                        max_depth=pc_max_depth,
+                        flip_y=args.pc_flip_y,
+                        flip_x=args.pc_flip_x,
+                    )
+                    if flip_z:
+                        xyz_cam[:, 2] *= -1.0
+                    xyz_world_mj = cam_to_world(model=model, data=data, cam_name=cam_name, pts_cam_mj=xyz_cam)
+                    xyz_world_unity = mujoco_to_unity_xyz(xyz_world_mj)
+
+                    pc_payload = pc7_payload(xyz_world_unity, rgb_pc, size=0.02)
+
+                    pc_topic = f"SimPub/Sensors/{cam_name}/pc".encode("utf-8")
+                    pub.send_multipart([pc_topic, pc_payload])
+
+                    if frame_idx % 60 == 0 and xyz_world_unity.shape[0] > 0:
+                        mn = xyz_world_unity.min(axis=0); mx = xyz_world_unity.max(axis=0)
+                        print(f"[PC] {cam_name} N={xyz_world_unity.shape[0]} bbox min={mn} max={mx} bytes={len(pc_payload)}")
+
+                # --- RGBD blob: publish ONCE for THIS cam_name ---
+                meta = {
+                    "cam": cam_name,
+                    "w": int(args.w),
+                    "h": int(args.h),
+                    "fovy": fovy,
+                    # anything else you already include...
+                }
+                #meta = sanitize_meta(meta)
+                #json_ = json.dumps(meta, separators=(",", ":")).encode("utf-8")
+
+                #blob = build_rgbd_blob(rgb_jpg, depth_m, meta, pc=np.zeros((0, 3), np.float32))
+                # pts_cam_mj computed from depth
+                pts_cam, _rgb_dummy = depth_to_pointcloud_xyzrgb(
+                    depth_m, rgb, args.w, args.h, fovy,
+                    stride=args.pc_stride,
+                    min_depth=args.pc_min_depth,
+                    max_depth=pc_max_depth,
+                    flip_y=args.pc_flip_y,
+                    flip_x=args.pc_flip_x,
+                )
+                if flip_z:
+                    pts_cam[:, 2] *= -1.0
+                pts_world = cam_to_world(model=model, data=data, cam_name=cam_name, pts_cam_mj=pts_cam)
+
+                # Only attach PC in the RGBD blob for "top" to reduce load
+                pc_for_blob = mujoco_to_unity_xyz(pts_world) if (args.pc and cam_name in pc_cams) else np.zeros((0, 3), np.float32)
+
+                blob = build_rgbd_blob(
+                    rgb_jpg=rgb_jpg,
+                    depth_m=depth_m,
+                    meta=meta,
+                    pc=pc_for_blob,
+                )
+
+
+                rgbd_topic = f"SimPub/Sensors/{cam_name}/rgbd".encode("utf-8")
+                pub.send_multipart([rgbd_topic, blob])
+                if frame_idx % 60 == 0:
+                    if pts_world.shape[0] > 0:
+                        print(cam_name, "pc N=", pts_world.shape[0], "xyz min/max", pts_world.min(axis=0), pts_world.max(axis=0))
+                    else:
+                        print(cam_name, "pc N=0 (no valid points after depth filter)")
+
+
+
+
+
+            elapsed = time.time() - t0
+            time.sleep(max(0.0, dt - elapsed))
+            frame_idx += 1
+
+    except KeyboardInterrupt:
+        print("\n[SimPub] Stopping...")
+    finally:
+        stop_evt.set()
+        time.sleep(0.2)
+        try:
+            renderer.close()
+        except Exception:
+            pass
+        pub.close(0)
+        zctx.term()
+
+
+if __name__ == "__main__":
+    main()
+# python .\SimPublisher\sii\simpub_sii_sensors-pz   --xml .\LAB\lab1.xml   --bind_ip 0.0.0.0   --host_ip 192.168.0.208   --fps 30 --w 640 --h 480   --pc --pc_stride 4 
+
+#  & c:\Users\user\Desktop\Franka-Robot-Real-to-Sim-Teleoperation-VR-Pointcloud-Simulation\.venv\Scripts\python.exe .\SimPublisher\sii\simpub_sii_sensors-pz --xml .\LAB\lab1_T_stack.xml --bind_ip 0.0.0.0 --host_ip 192.168.0.208 --fps 30 --w 640 --h 480 --cams top --pc --pc_cams top
+
+#  & c:\Users\user\Desktop\Franka-Robot-Real-to-Sim-Teleoperation-VR-Pointcloud-Simulation\.venv\Scripts\python.exe .\SimPublisher\sii\simpub_sii_sensors-pz --xml .\LAB\lab1_T_stack.xml --bind_ip 0.0.0.0 --host_ip 192.168.0.208 --fps 30 --w 640 --h 480 --cams top front left right wrist --pc --pc_cams top front left right wrist
+
+# python .\SimPublisher\sii\simpub_sii_sensors-pz --xml .\LAB\lab1_T_stack.xml --bind_ip 0.0.0.0 --host_ip 192.168.0.208 --fps 30 --w 640 --h 480 --cams top front left right wrist --pc --pc_cams top front left right wrist
+
+# & .\.venv\Scripts\python.exe `
+#   .\SimPublisher\sii\simpub_sii_sensors-pz `
+#   --xml .\LAB\lab1_T_stack.xml `
+#   --bind_ip 0.0.0.0 `
+#   --host_ip 192.168.0.208 `
+#   --fps 30 --w 640 --h 480 `
+#   --cams top front left right `
+#   --pc --pc_cams top front left right `
+#   --pc_min_depth 0.05 `
+#   --pc_max_depth 6.0
+
+

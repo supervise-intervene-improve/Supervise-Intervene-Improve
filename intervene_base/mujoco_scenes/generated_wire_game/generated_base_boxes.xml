@@ -1,0 +1,44 @@
+<mujoco model="wire_base">
+    <!-- <option gravity="0 0 0"/> -->
+
+    <asset>
+        <material name="orange_mat" rgba="1 0.356 0.133 1"/>
+        <mesh name="my_mesh" file="/path/to/Intervention_IL_AR/intervene_base/mujoco_scenes/wire_and_loop_assets/Basic_Model_Body.stl" scale="0.001 0.001 0.001"/>
+    </asset>
+
+    <default>
+        <default class="wire_base_collision">
+            <geom type="box" contype="1" conaffinity="1" rgba="0 1 0 0.7"/>
+        </default>
+    </default>
+
+    <worldbody>
+        <body name="object" pos="0.6 -0.2 0.22">
+            <!-- <freejoint/> -->
+            <geom type="mesh" mesh="my_mesh" material="orange_mat"/>
+
+            <!-- base -->
+            <geom name="body_col_base" class="wire_base_collision"
+                pos="0 0 0.005"
+                size="0.05 0.05 0.005"/>
+
+            <!-- stem -->
+            <geom name="body_col_stem" class="wire_base_collision"
+                pos="0 0 0.075"
+                size="0.01 0.01 0.065"/>
+
+            <!-- top horizontal arm -->
+            <geom name="body_col_top_x" class="wire_base_collision"
+                pos="-0.05 -0.1 0.15"
+                size="0.06 0.01 0.01"/>
+
+            <!-- top vertical arm -->
+            <geom name="body_col_top_y" class="wire_base_collision"
+                pos="0.0 -0.04 0.15"
+                size="0.01 0.05 0.01"/>
+
+
+
+        </body>
+    </worldbody>
+</mujoco>

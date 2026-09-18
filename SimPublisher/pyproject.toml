@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simpub"
+version = "2.2.0"
+description="A cross-environment tool to publish objects from simulation for Augmented Reality and Human Robot Interaction."
+dependencies = [
+    "numpy",
+    "colorama",
+    "trimesh",
+    "Pillow",
+    "flask",
+    "pyyaml",
+    "zmq",
+]
+readme = "README.md"
+license-files = ["LICENSE"]

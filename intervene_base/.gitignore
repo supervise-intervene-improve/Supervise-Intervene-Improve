@@ -1,0 +1,45 @@
+__pycache__/
+*.pyc
+*.so
+*.whl
+.env
+*.log
+
+# Local tool/cache state
+.cache/
+.codex
+.codex.backup
+MUJOCO_LOG.TXT
+
+# Nested external checkout
+SimPublisher/
+DynamixelSDK/
+
+# FACTR commissioning reports: calibration, gravity and torque-direction
+# validation encode THIS physical leader arm. They are per-setup, not portable.
+factr/validation/*.json
+
+# Robot demonstrations, datasets, and training outputs
+*_demonstrations/
+CUP_demonstrations/
+CUP_demonstrations_user/
+T_shape_total_demons/
+WG_Test_demonstrations/
+data_clean/
+lerobot_local_data*/
+outputs/
+teleop_logs/
+testing_record/
+INTERVENTION_DATA/
+MODEL_WEIGHTS/
+
+# Large/generated data artifacts
+*.arrow
+*.npz
+*.parquet
+*.safetensors
+*.zip
+
+# Local render/debug snapshots
+top_depth.png
+top_rgb.png

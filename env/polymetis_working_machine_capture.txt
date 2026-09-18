@@ -1,0 +1,74 @@
+# Polymetis / novometis capture from the working machine
+
+## Editable install
+pip package: polymetis==0.2
+source path: /path/to/workspace/novometis/polymetis
+source repo: https://github.com/anonymized-for-review/novometis.git
+source commit: 0000000000000000000000000000000000000000
+source branch: main
+
+## Direct URL metadata: policy Conda env
+{"dir_info": {"editable": true}, "url": "file:///path/to/workspace/novometis/polymetis"}
+## Direct URL metadata: VR .venv
+{"dir_info": {"editable": true}, "url": "file:///path/to/workspace/novometis/polymetis"}
+## Import status: policy Conda env
+polymetis: FOUND /path/to/workspace/novometis/polymetis/python/polymetis/__init__.py
+torchcontrol: FOUND /path/to/workspace/novometis/polymetis/python/torchcontrol/__init__.py
+pinocchio: FOUND /home/user/miniconda3/envs/polymetis/lib/python3.10/site-packages/pinocchio/__init__.py
+casadi: FOUND /home/user/miniconda3/envs/polymetis/lib/python3.10/site-packages/casadi/__init__.py
+grpc: FOUND /home/user/miniconda3/envs/polymetis/lib/python3.10/site-packages/grpc/__init__.py
+hydra: FOUND /home/user/miniconda3/envs/polymetis/lib/python3.10/site-packages/hydra/__init__.py
+version: (git) 0000000000000000000000000000000000000000
+polymetis import: OK
+polymetis file: /path/to/workspace/novometis/polymetis/python/polymetis/__init__.py
+
+## Import status: VR .venv
+polymetis: FOUND /path/to/workspace/novometis/polymetis/python/polymetis/__init__.py
+torchcontrol: FOUND /path/to/workspace/novometis/polymetis/python/torchcontrol/__init__.py
+grpc: FOUND /home/user/Downloads/Intervention_IL_AR/.venv/lib/python3.13/site-packages/grpc/__init__.py
+hydra: FOUND /home/user/Downloads/Intervention_IL_AR/.venv/lib/python3.13/site-packages/hydra/__init__.py
+version: (git) 0000000000000000000000000000000000000000
+polymetis import: ERROR OSError('Could not load this library: /home/user/miniconda3/envs/polymetis/lib/libtorchscript_pinocchio.so')
+
+## Native libs
+-rw-r--r-- 1 user user  78K Dec 15  2025 /home/user/miniconda3/envs/polymetis/lib/libtorchrot.so
+-rw-r--r-- 1 user user 688K Dec 15  2025 /home/user/miniconda3/envs/polymetis/lib/libtorchscript_pinocchio.so
+-rw-r--r-- 1 nobody         nogroup         69K Dec  3  2025 /usr/local/lib/libtorchrot.so
+
+## libtorchscript_pinocchio.so ldd with Conda lib path
+	linux-vdso.so.1 (0x00007ffd2bdda000)
+	libc10.so => not found
+	libtorchrot.so => /home/user/miniconda3/envs/polymetis/lib/libtorchrot.so (0x0000790916dc9000)
+	libpinocchio_parsers.so.3.3.0 => /home/user/miniconda3/envs/polymetis/lib/libpinocchio_parsers.so.3.3.0 (0x0000790916d3e000)
+	liburdfdom_world.so.4.0 => /home/user/miniconda3/envs/polymetis/lib/liburdfdom_world.so.4.0 (0x0000790916d16000)
+	libgomp.so.1 => /home/user/miniconda3/envs/polymetis/lib/libgomp.so.1 (0x0000790916cc0000)
+	libpinocchio_default.so.3.3.0 => /home/user/miniconda3/envs/polymetis/lib/libpinocchio_default.so.3.3.0 (0x0000790916600000)
+	libspdlog.so.1.16 => /home/user/miniconda3/envs/polymetis/lib/libspdlog.so.1.16 (0x0000790916c4e000)
+	libtorch.so => not found
+	libtorch_cpu.so => not found
+	libstdc++.so.6 => /home/user/miniconda3/envs/polymetis/lib/libstdc++.so.6 (0x0000790916200000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x0000790916b67000)
+	libgcc_s.so.1 => /home/user/miniconda3/envs/polymetis/lib/libgcc_s.so.1 (0x0000790916b38000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000790915e00000)
+	libc10.so => not found
+	libtorch_cpu.so => not found
+	libtorch.so => not found
+	libcoal.so => /home/user/miniconda3/envs/polymetis/lib/./libcoal.so (0x0000790915600000)
+	libboost_filesystem.so.1.86.0 => /home/user/miniconda3/envs/polymetis/lib/./libboost_filesystem.so.1.86.0 (0x0000790916b07000)
+	liburdfdom_model.so.4.0 => /home/user/miniconda3/envs/polymetis/lib/./liburdfdom_model.so.4.0 (0x00007909165d8000)
+	libsdformat14.so.14 => /home/user/miniconda3/envs/polymetis/lib/./libsdformat14.so.14 (0x0000790915200000)
+	libgz-math7.so.7 => /home/user/miniconda3/envs/polymetis/lib/./libgz-math7.so.7 (0x0000790916573000)
+	libconsole_bridge.so.1.0 => /home/user/miniconda3/envs/polymetis/lib/libconsole_bridge.so.1.0 (0x0000790916aff000)
+	libtinyxml2.so.10 => /home/user/miniconda3/envs/polymetis/lib/libtinyxml2.so.10 (0x0000790916558000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x0000790916afa000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x0000790916553000)
+	libfmt.so.12 => /home/user/miniconda3/envs/polymetis/lib/./libfmt.so.12 (0x000079091652c000)
+	/lib64/ld-linux-x86-64.so.2 (0x0000790916e81000)
+	libassimp.so.5 => /home/user/miniconda3/envs/polymetis/lib/././libassimp.so.5 (0x0000790914600000)
+	libboost_serialization.so.1.86.0 => /home/user/miniconda3/envs/polymetis/lib/././libboost_serialization.so.1.86.0 (0x00007909164e3000)
+	libqhull_r.so.8.0 => /home/user/miniconda3/envs/polymetis/lib/././libqhull_r.so.8.0 (0x0000790916184000)
+	liboctomap.so.1.10 => /home/user/miniconda3/envs/polymetis/lib/././liboctomap.so.1.10 (0x000079091611d000)
+	liboctomath.so.1.10 => /home/user/miniconda3/envs/polymetis/lib/././liboctomath.so.1.10 (0x00007909164da000)
+	librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007909164d3000)
+	libgz-utils2.so.2 => /home/user/miniconda3/envs/polymetis/lib/././libgz-utils2.so.2 (0x00007909164c8000)
+	libz.so.1 => /home/user/miniconda3/envs/polymetis/lib/./././libz.so.1 (0x00007909164ad000)
