@@ -1,0 +1,57 @@
+{
+  "synthetic_example": true,
+  "schema_version": "1.0",
+  "block_manifest": {
+    "participant_id": "P1A-999",
+    "session_id": "P1A-999_20990101_120000",
+    "study": "1A",
+    "block_id": "B01",
+    "block_number": 1,
+    "condition_code": "S1",
+    "condition_name": "Desktop-RGB + Kinesthetic Teaching",
+    "condition_position": 1,
+    "task_order_code": "T-O1"
+  },
+  "episodes": [
+    {
+      "episode_id": "SYNTHETIC-E001",
+      "participant_id": "P1A-999",
+      "session_id": "P1A-999_20990101_120000",
+      "block_id": "B01",
+      "condition_code": "S1",
+      "task": "T-shape",
+      "scenario_id": "SYNTHETIC-SCENARIO-01",
+      "id_ood_label": "ID",
+      "robot_cell_id": "SYNTHETIC-CELL-01",
+      "episode_start_time": "2099-01-01T12:01:00Z",
+      "episode_end_time": "2099-01-01T12:02:15Z",
+      "success": true,
+      "completion_time_s": 75.0,
+      "number_of_interventions": 1,
+      "success_without_intervention": false,
+      "success_after_intervention": true
+    }
+  ],
+  "interventions": [
+    {
+      "intervention_id": "SYNTHETIC-I001",
+      "episode_id": "SYNTHETIC-E001",
+      "participant_id": "P1A-999",
+      "session_id": "P1A-999_20990101_120000",
+      "block_id": "B01",
+      "robot_cell_id": "SYNTHETIC-CELL-01",
+      "request_timestamp": "2099-01-01T12:01:20Z",
+      "pause_timestamp": "2099-01-01T12:01:21Z",
+      "ready_timestamp": "2099-01-01T12:01:23Z",
+      "manual_control_start_timestamp": "2099-01-01T12:01:25Z",
+      "release_timestamp": "2099-01-01T12:01:40Z",
+      "synchronization_time_s": 5.0,
+      "correction_time_s": 15.0,
+      "queue_waiting_time_s": 0.0,
+      "robot_state_at_takeover": "SYNTHETIC_STATE_TAKEOVER",
+      "robot_state_at_release": "SYNTHETIC_STATE_RELEASE",
+      "outcome_after_intervention": "success",
+      "repeated_intervention_index": 1
+    }
+  ]
+}

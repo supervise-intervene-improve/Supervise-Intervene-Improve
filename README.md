@@ -2,7 +2,7 @@
 
 **Interface Design for Human Oversight of Multiple Autonomous Robot Manipulators**
 
-Project website: [ANONYMOUS PROJECT WEBSITE URL]
+Project website: https://supervise-intervene-improve.github.io/supervise-intervene-improve-webpage/
 
 ---
 
@@ -203,6 +203,18 @@ WINDOWS=1 LAB=tshape FPS=60 STUDY_ACC_METHOD=chunk_residual \
   bash utils/run_main_policy.sh
 ```
 
+**Questionnaires.** The post-condition and final-comparison questionnaires for all three
+studies were collected with the offline Streamlit app in
+[`questionnaire/`](questionnaire/README.md) (Study 1A = Supervision, Study 1B = Control, Fleet = Fleet):
+
+```bash
+cd questionnaire
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env && python scripts/generate_pin_hash.py   # paste the hash into .env
+streamlit run app.py
+```
+
 #### `run_main_policy.sh` arguments used above
 
 | Variable | Value in studies | Meaning |
@@ -361,6 +373,7 @@ intervention is live.
 ├── SII-Meta-Quest3/                 # Unity project for the Quest 3 app
 │   └── Assets/SIIMetaQuest3/Core/   # Selector grid, GPU point-cloud renderer, RGB panels, HUD, input forwarding
 ├── GPU/                             # Standalone GPU point-cloud streamer / renderer sources
+├── questionnaire/                   # Offline Streamlit questionnaire app used in the user studies
 ├── tools/                           # Performance and forensics reports (perf_report.py, quest_telemetry.py, …)
 ├── env/                             # Environment lock files and setup guide (ENVIRONMENT_SETUP.md)
 ├── run_multi_window_robot.sh        # VR streaming backend (see reference above)
